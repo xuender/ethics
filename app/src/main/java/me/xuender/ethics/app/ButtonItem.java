@@ -3,11 +3,9 @@ package me.xuender.ethics.app;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by ender on 14-4-26.
