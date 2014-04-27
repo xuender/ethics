@@ -5,4 +5,9 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <color name="木">#ff00af00</color>
+    <color name="火">#ffaf0000</color>
+    <color name="土">#ffafaf00</color>
+    <color name="金">#ffcdcdcd</color>
+    <color name="水">#ff505050</color>
 </resources>
