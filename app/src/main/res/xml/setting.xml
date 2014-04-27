@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/setting">
+    <Preference
+        android:summary="@string/ver"
+        android:title="@string/about" />
+    <EditTextPreference
+        android:numeric="integer"
+        android:defaultValue="7"
+        android:title="@string/last"
+        android:summary="@string/last_summary"
+        android:key="last"
+        android:inputType="number" />
+    <EditTextPreference
+        android:numeric="integer"
+        android:defaultValue="10"
+        android:title="@string/play"
+        android:summary="@string/play_summary"
+        android:key="play"
+        android:inputType="number" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="sound"
+        android:summary="@string/sound_summary"
+        android:switchTextOff="@string/sound_off"
+        android:switchTextOn="@string/sound_on"
+        android:title="@string/sound_title" />
+</PreferenceScreen>

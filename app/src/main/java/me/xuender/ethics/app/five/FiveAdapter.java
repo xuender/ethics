@@ -1,4 +1,4 @@
-package me.xuender.ethics.app;
+package me.xuender.ethics.app.five;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.Locale;
+
+import me.xuender.ethics.app.R;
+import me.xuender.ethics.app.chart.ChartFragment;
 
 /**
  * Created by ender on 14-4-27.
@@ -23,6 +26,7 @@ public class FiveAdapter extends FragmentPagerAdapter {
         if (chartFragment == null) {
             chartFragment = new ChartFragment();
         }
+        chartFragment.initData();
         return chartFragment;
     }
 

@@ -1,4 +1,4 @@
-package me.xuender.ethics.app;
+package me.xuender.ethics.app.five;
 
 import android.content.SharedPreferences;
 import android.view.View;
@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * Created by ender on 14-4-26.
  */
-class ButtonItem {
+public class ButtonItem {
     Button button;
     private String title;
     int count = 0;

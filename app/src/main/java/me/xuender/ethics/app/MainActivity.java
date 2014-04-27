@@ -1,5 +1,8 @@
 package me.xuender.ethics.app;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -7,9 +10,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import me.xuender.ethics.app.five.FiveAdapter;
+import me.xuender.ethics.app.settings.SettingsActivity;
 
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
+public class MainActivity extends ActionBarActivity implements ActionBar.TabListener,
+        DialogInterface.OnClickListener {
     private FiveAdapter fiveAdapter;
     private ViewPager viewPager;
 
@@ -44,10 +52,18 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.clean) {
-            fiveAdapter.clean();
+            new AlertDialog.Builder(this).setTitle(getString(R.string.clean))
+                    .setMessage(getString(R.string.clean_ask))
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.yes, this)
+                    .setNegativeButton(android.R.string.no, null).show();
             return true;
         }
-        return super.onOptionsItemSelected(item);
+//        return super.onOptionsItemSelected(item);
+        Intent intent = new Intent();
+        intent.setClass(this, SettingsActivity.class);
+        startActivity(intent);
+        return true;
     }
 
     @Override
@@ -63,5 +79,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        fiveAdapter.clean();
+        Toast.makeText(this, getString(R.string.clean_end), Toast.LENGTH_SHORT).show();
     }
 }

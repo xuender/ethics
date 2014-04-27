@@ -1,10 +1,13 @@
-package me.xuender.ethics.app;
+package me.xuender.ethics.app.five;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +23,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import me.xuender.ethics.app.EthicsApplication;
+import me.xuender.ethics.app.R;
+
 /**
  * 五毒丸
  * Created by ender on 14-4-27.
@@ -30,6 +36,8 @@ public class FiveFragment extends Fragment implements Button.OnClickListener {
     private SharedPreferences sp;
     private Set<String> dates;
     private View rootView;
+    private SharedPreferences prefs;
+    private SoundPool soundPool;
 
     public void clean() {
         for (ButtonItem bi : list) {
@@ -41,9 +49,11 @@ public class FiveFragment extends Fragment implements Button.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (rootView == null) {
+            prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             rootView = inflater.inflate(R.layout.fragment_five, container, false);
             textView = (TextView) rootView.findViewById(R.id.textView);
             sp = getActivity().getSharedPreferences("count", Context.MODE_PRIVATE);
+            声音初始化();
         }
         return rootView;
     }
@@ -53,6 +63,11 @@ public class FiveFragment extends Fragment implements Button.OnClickListener {
     public void onStart() {
         super.onStart();
         init();
+    }
+
+    private void 声音初始化() {
+        soundPool = new SoundPool(1, AudioManager.STREAM_SYSTEM, 5);
+        soundPool.load(getActivity(), R.raw.play, 1);
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -90,11 +105,14 @@ public class FiveFragment extends Fragment implements Button.OnClickListener {
                         count += i.count;
                     }
                     textView.setText(getResources().getText(R.string.fight).toString()
-                            + (count * 10));
+                            + (count * Integer.valueOf(prefs.getString("play", "10"))));
                 } else {
                     dates.add(new SimpleDateFormat("yyyyMMdd").format(
                             new Date(System.currentTimeMillis())));
                     textView.setText(getResources().getText(R.string.title));
+                    if (prefs.getBoolean("sound", true)) {
+                        soundPool.play(1, 1, 1, 0, 0, 1);
+                    }
                 }
                 Log.d("点击", bi.button.getText().toString());
             }

@@ -1,4 +1,4 @@
-package me.xuender.ethics.app;
+package me.xuender.ethics.app.chart;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +25,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+import me.xuender.ethics.app.R;
+
 /**
  * Created by ender on 14-4-27.
  */
@@ -36,12 +38,15 @@ public class ChartFragment extends Fragment {
     private XYMultipleSeriesDataset dataSet;
     private XYMultipleSeriesRenderer renderer;
     private List<String> dates = new ArrayList<String>();
+    private SharedPreferences prefs;
+    private static final int WEEK = 7;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (rootView == null) {
+            prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             context = container.getContext();
             sp = getActivity().getSharedPreferences("count", Context.MODE_PRIVATE);
             rootView = createChart();
@@ -58,23 +63,28 @@ public class ChartFragment extends Fragment {
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void initData() {
+    public void initData() {
+        if (dates == null || sp == null) {
+            return;
+        }
         dates.clear();
         dates.addAll(sp.getStringSet("date", new HashSet<String>()));
         Collections.sort(dates);
-        //TODO 设置保存条数
-//        while (dates.size() > 7) {
-//            dates.remove(0);
-//        }
+        //设置显示条数
+        String last = prefs.getString("last", "7");
+        if (last == null || last.length() == 0) {
+            last = "7";
+        }
+        while (dates.size() > Integer.valueOf(last)) {
+            dates.remove(0);
+        }
         int max = 5;
         for (String b : BS) {
             XYSeries series = new XYSeries(b);
             int i = 0;
             for (String s : dates) {
-                Log.d("日期", s);
                 i++;
                 int num = sp.getInt(s + b, 0);
-                Log.d("num", String.valueOf(num));
                 series.add(i, num);
                 if (max < num) {
                     max = num;
@@ -104,7 +114,7 @@ public class ChartFragment extends Fragment {
         renderer.setYAxisMin(0);//设置y轴最小值是0
         renderer.setYAxisMax(5);
         renderer.setYLabels(10);//设置Y轴刻度个数（貌似不太准确）
-        renderer.setXAxisMax(7);
+        renderer.setXAxisMax(WEEK);
         renderer.setShowGrid(true);//显示网格
 //        //将x标签栏目显示如：1,2,3,4替换为显示1月，2月，3月，4月
         int i = 0;

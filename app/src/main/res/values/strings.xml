@@ -2,13 +2,30 @@
 <resources>
 
     <string name="app_name">性理扶阳</string>
-    <string name="clean">今日清零</string>
     <string name="title">今天你吃五毒丸了吗？</string>
     <string name="fight">若想好病，需自责罚。\n疏导阴气，拨阴取阳。\n\n抽: </string>
     <string name="five">五毒丸</string>
     <string name="repent">忏悔录</string>
     <string name="date">日期</string>
     <string name="count">次数</string>
+    <string name="setting">设置</string>
+
+    <string name="about">关于</string>
+    <string name="ver">1.G.3</string>
+
+    <string name="clean">今日清零</string>
+    <string name="clean_ask">请问您是否要清零今日的五毒记录?</string>
+    <string name="clean_end">清零完毕</string>
+
+    <string name="last">忏悔录显示条数</string>
+    <string name="last_summary">最近的天数,默认7天一周</string>
+
+    <string name="play">抽的基数</string>
+    <string name="play_summary">犯一次错抽几次，默认10次</string>
+
+    <string name="sound_summary">声音播放状态</string>
+    <string name="sound_title">音效</string>
+    <string name="sound_on">打开</string>
+    <string name="sound_off">静音</string>
 
 </resources>
-
