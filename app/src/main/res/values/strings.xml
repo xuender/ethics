@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">性理扶阳</string>
+    <!-- 五毒丸 -->
     <string name="title">今天你吃五毒丸了吗？</string>
     <string name="fight">若想好病，需自责罚。\n疏导阴气，拨阴取阳。\n\n抽: </string>
     <string name="five">五毒丸</string>
@@ -10,12 +11,13 @@
     <string name="count">次数</string>
     <string name="setting">设置</string>
 
+    <!-- 设置 -->
     <string name="about">关于</string>
     <string name="ver">1.G.3</string>
 
-    <string name="clean">今日清零</string>
+    <string name="clean">清零</string>
     <string name="clean_ask">请问您是否要清零今日的五毒记录?</string>
-    <string name="clean_end">清零完毕</string>
+    <string name="clean_end">今日清零完毕</string>
 
     <string name="last">忏悔录显示条数</string>
     <string name="last_summary">最近的天数,默认7天一周</string>
@@ -27,5 +29,21 @@
     <string name="sound_title">音效</string>
     <string name="sound_on">打开</string>
     <string name="sound_off">静音</string>
+
+    <!-- 志纲 -->
+    <string name="zhi">志纲/立志向</string>
+    <string name="zhi_summary">遇到不如意需立志，\n立住则是真阳木。</string>
+    <string name="add">增加</string>
+    <string name="input">请输入志向</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <!-- 义纲 -->
+    <string name="yi">义纲/找好处</string>
+    <string name="navigation_drawer_open">打开善人名录</string>
+    <string name="navigation_drawer_close">关闭善人名录</string>
+    <string name="yi_summary">找人好处\n生人气，拿出来消气\n人生你气，拿出来宣扬</string>
+    <string name="googMan">善人</string>
+    <string name="inputName">请输入善人姓名</string>
+    <string name="inputGood">请输入善行</string>
 
 </resources>

@@ -18,7 +18,20 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".five.FiveActivity"
+            android:label="@string/five"
+            android:icon="@drawable/ic_five" />
+        <activity
+            android:name=".notes.ZhiActivity"
+            android:label="@string/zhi"
+            android:icon="@drawable/ic_zhi" />
+        <activity
+            android:name=".notes.YiActivity"
+            android:label="@string/yi"
+            android:icon="@drawable/ic_yi" />
+        <activity
             android:name=".settings.SettingsActivity"
-            android:label="@string/setting" />
+            android:label="@string/setting"
+            android:icon="@android:drawable/ic_menu_manage" />
     </application>
 </manifest>

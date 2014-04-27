@@ -1,89 +1,47 @@
 package me.xuender.ethics.app;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-import me.xuender.ethics.app.five.FiveAdapter;
-import me.xuender.ethics.app.settings.SettingsActivity;
+import me.xuender.ethics.app.five.FiveActivity;
+import me.xuender.ethics.app.notes.YiActivity;
+import me.xuender.ethics.app.notes.ZhiActivity;
 
-
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener,
-        DialogInterface.OnClickListener {
-    private FiveAdapter fiveAdapter;
-    private ViewPager viewPager;
-
+/**
+ * 首页
+ * Created by ender on 14-4-27.
+ */
+public class MainActivity extends Activity implements Button.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        fiveAdapter = new FiveAdapter(getSupportFragmentManager(), this);
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        viewPager.setAdapter(fiveAdapter);
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                actionBar.setSelectedNavigationItem(position);
-            }
-        });
-        for (int i = 0; i < fiveAdapter.getCount(); i++) {
-            actionBar.addTab(actionBar.newTab().setText(fiveAdapter.getPageTitle(i))
-                    .setTabListener(this));
-        }
+        findViewById(R.id.five).setOnClickListener(this);
+        findViewById(R.id.zhi).setOnClickListener(this);
+        findViewById(R.id.yi).setOnClickListener(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.clean) {
-            new AlertDialog.Builder(this).setTitle(getString(R.string.clean))
-                    .setMessage(getString(R.string.clean_ask))
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setPositiveButton(android.R.string.yes, this)
-                    .setNegativeButton(android.R.string.no, null).show();
-            return true;
-        }
-//        return super.onOptionsItemSelected(item);
+    public void onClick(View v) {
         Intent intent = new Intent();
-        intent.setClass(this, SettingsActivity.class);
-        startActivity(intent);
-        return true;
-    }
-
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        viewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-    }
-
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-        fiveAdapter.clean();
-        Toast.makeText(this, getString(R.string.clean_end), Toast.LENGTH_SHORT).show();
+        Log.d("id", String.valueOf(v.getId()));
+        switch (v.getId()) {
+            case R.id.five:
+                intent.setClass(this, FiveActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.zhi:
+                intent.setClass(this, ZhiActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.yi:
+                intent.setClass(this, YiActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

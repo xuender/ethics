@@ -129,6 +129,7 @@ public class ChartFragment extends Fragment {
         renderer.addSeriesRenderer(createRenderer(R.color.土));
         renderer.addSeriesRenderer(createRenderer(R.color.金));
         renderer.addSeriesRenderer(createRenderer(R.color.水));
+        //ChartFactory.getBarChartView()
         return ChartFactory.getLineChartView(context, dataSet, renderer);
     }
 
