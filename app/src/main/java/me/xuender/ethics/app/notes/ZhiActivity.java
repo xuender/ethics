@@ -22,7 +22,8 @@ public class ZhiActivity extends ActionBarActivity {
         setContentView(R.layout.activity_zhi);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        noteFragment = new NoteFragment(getString(R.string.zhi_summary), R.string.input, ZHI_KEY);
+        noteFragment = new NoteFragment(getString(R.string.zhi_summary), R.string.input, ZHI_KEY,
+                this);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, noteFragment)
@@ -43,6 +44,9 @@ public class ZhiActivity extends ActionBarActivity {
         switch (id) {
             case R.id.add:
                 noteFragment.add();
+                return true;
+            case R.id.del:
+                noteFragment.del();
                 return true;
             case android.R.id.home:
                 this.finish();

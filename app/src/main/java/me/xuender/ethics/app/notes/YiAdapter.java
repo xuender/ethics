@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v7.app.ActionBar;
-import android.view.View;
 
 import java.util.Locale;
 
@@ -20,21 +18,24 @@ public class YiAdapter extends FragmentPagerAdapter implements OnSelectNote {
     private int count = 1;
     private Note nowNote;
     private OnSetTab onSetTab;
+    private NoteFragment noteFragment;
 
     public void setOnSetTab(OnSetTab onSetTab) {
         this.onSetTab = onSetTab;
     }
 
-
     public NoteFragment getNoteFragment() {
-        return new NoteFragment(context.getString(R.string.yi_summary), R.string.inputGood,
-                nowNote.getTitle());
+        if (noteFragment == null) {
+            noteFragment = new NoteFragment(nowNote.getTitle(), R.string.inputGood,
+                    nowNote.getTitle(), context);
+        }
+        return noteFragment;
     }
 
     public NoteFragment getUserFragment() {
         if (userFragment == null) {
             userFragment = new NoteFragment(context.getString(R.string.yi_summary),
-                    R.string.inputName, "_users");
+                    R.string.inputName, "_users", context);
             userFragment.setOnSelectNote(this);
         }
         return userFragment;

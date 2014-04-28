@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.util.Log;
@@ -16,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,14 +23,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import me.xuender.ethics.app.R;
 
 /**
  * Created by ender on 14-4-27.
  */
-public class NoteFragment extends Fragment implements DialogInterface.OnClickListener, AdapterView.OnItemClickListener {
+public class NoteFragment extends Fragment implements DialogInterface.OnClickListener,
+        AdapterView.OnItemClickListener {
     private View rootView;
     private TextView textView;
     private SharedPreferences notes;
@@ -39,37 +39,66 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
     private EditText editText;
     private AlertDialog alert;
     private NoteAdapter adapter;
-    private List<Note> list = new ArrayList<Note>();
     private ListView listView;
     private int input;
     private OnSelectNote onSelectNote;
+    private Context context;
+    private boolean del = false;
+    private int nowPosition;
 
     public void setOnSelectNote(OnSelectNote onSelectNote) {
         this.onSelectNote = onSelectNote;
     }
 
-    public NoteFragment(String title, int input, String key) {
+    public NoteFragment(String title, int input, String key, Context context) {
         this.title = title;
         this.key = key;
         this.input = input;
+        this.context = context;
     }
 
     public void add() {
         showAlert();
     }
 
+    public void del() {
+        del = true;
+        Toast.makeText(context, getString(R.string.del_click), Toast.LENGTH_SHORT).show();
+    }
+
     private AlertDialog showAlert() {
         if (alert == null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(getString(input));
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(context.getString(input));
             builder.setIcon(android.R.drawable.stat_sys_warning);
-            builder.setView(editText);
+            builder.setView(getEditText());
             builder.setPositiveButton(R.string.ok, this);
             builder.setNegativeButton(R.string.cancel, null);
             alert = builder.show();
         }
         alert.show();
         return alert;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+        this.key = title;
+        textView.setText(title);
+        adapter.clear();
+        initData();
+    }
+
+    private EditText getEditText() {
+        if (editText == null) {
+            editText = new EditText(context);
+            editText.setInputType(InputType.TYPE_CLASS_TEXT);
+        }
+        return editText;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -79,14 +108,12 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
             rootView = inflater.inflate(R.layout.fragment_note, container, false);
             textView = (TextView) rootView.findViewById(R.id.textView);
             textView.setText(title);
-            editText = new EditText(container.getContext());
-            editText.setInputType(InputType.TYPE_CLASS_TEXT);
-            notes = getActivity().getSharedPreferences("notes", Context.MODE_PRIVATE);
-            initData();
+            notes = context.getSharedPreferences("notes", Context.MODE_PRIVATE);
             listView = (ListView) rootView.findViewById(R.id.listView);
-            adapter = new NoteAdapter(getActivity(), list);
+            adapter = new NoteAdapter(context, new ArrayList<Note>());
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
+            initData();
         }
         return rootView;
     }
@@ -99,7 +126,7 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
                 Note note = new Note();
                 note.setTitle(obj.getString("t"));
                 note.setCreate(new Date(obj.getLong("c")));
-                list.add(note);
+                adapter.add(note);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -108,11 +135,20 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        Log.d("内容", editText.getText().toString());
-        Note note = new Note();
-        note.setTitle(editText.getText().toString());
-        note.setCreate(new Date(System.currentTimeMillis()));
-        adapter.add(note);
+        if (del) {
+            del = false;
+            adapter.remove(adapter.getItem(nowPosition));
+            saveNote();
+        } else {
+            Note note = new Note();
+            note.setTitle(editText.getText().toString());
+            note.setCreate(new Date(System.currentTimeMillis()));
+            adapter.add(note);
+            saveNote();
+        }
+    }
+
+    private void saveNote() {
         SharedPreferences.Editor editor = notes.edit();
         JSONArray array = new JSONArray();
         for (int i = 0; i < adapter.getCount(); i++) {
@@ -132,8 +168,24 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (onSelectNote != null) {
-            onSelectNote.select(list.get(position));
+        Log.d("view", String.valueOf(view));
+        Log.d("view", String.valueOf(id));
+        if (del) {
+            nowPosition = position;
+            new AlertDialog.Builder(context).setTitle(getString(R.string.del))
+                    .setMessage(getString(R.string.del_ask))
+                    .setIcon(android.R.drawable.ic_menu_help)
+                    .setPositiveButton(android.R.string.yes, this)
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            del = false;
+                        }
+                    }).show();
+        } else {
+            if (onSelectNote != null) {
+                onSelectNote.select(adapter.getItem(position));
+            }
         }
     }
 }

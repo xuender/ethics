@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
+import org.achartengine.chart.BarChart;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
@@ -39,7 +40,7 @@ public class ChartFragment extends Fragment {
     private XYMultipleSeriesRenderer renderer;
     private List<String> dates = new ArrayList<String>();
     private SharedPreferences prefs;
-    private static final int WEEK = 7;
+    private static final int WEEK = 5;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -71,13 +72,14 @@ public class ChartFragment extends Fragment {
         dates.addAll(sp.getStringSet("date", new HashSet<String>()));
         Collections.sort(dates);
         //设置显示条数
-        String last = prefs.getString("last", "7");
+        String last = prefs.getString("last", "5");
         if (last == null || last.length() == 0) {
-            last = "7";
+            last = "5";
         }
         while (dates.size() > Integer.valueOf(last)) {
             dates.remove(0);
         }
+
         int max = 5;
         for (String b : BS) {
             XYSeries series = new XYSeries(b);
@@ -86,7 +88,7 @@ public class ChartFragment extends Fragment {
                 i++;
                 int num = sp.getInt(s + b, 0);
                 series.add(i, num);
-                if (max < num) {
+                if (num > max) {
                     max = num;
                 }
             }
@@ -116,6 +118,7 @@ public class ChartFragment extends Fragment {
         renderer.setYLabels(10);//设置Y轴刻度个数（貌似不太准确）
         renderer.setXAxisMax(WEEK);
         renderer.setShowGrid(true);//显示网格
+        //renderer.setBarSpacing(0.1);
 //        //将x标签栏目显示如：1,2,3,4替换为显示1月，2月，3月，4月
         int i = 0;
         for (String s : dates) {
@@ -129,8 +132,8 @@ public class ChartFragment extends Fragment {
         renderer.addSeriesRenderer(createRenderer(R.color.土));
         renderer.addSeriesRenderer(createRenderer(R.color.金));
         renderer.addSeriesRenderer(createRenderer(R.color.水));
-        //ChartFactory.getBarChartView()
-        return ChartFactory.getLineChartView(context, dataSet, renderer);
+        return ChartFactory.getBarChartView(context, dataSet, renderer, BarChart.Type.DEFAULT);
+//        return ChartFactory.getLineChartView(context, dataSet, renderer);
     }
 
     private XYSeriesRenderer createRenderer(int color) {

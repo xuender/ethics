@@ -20,7 +20,7 @@
     <string name="clean_end">今日清零完毕</string>
 
     <string name="last">忏悔录显示条数</string>
-    <string name="last_summary">最近的天数,默认7天一周</string>
+    <string name="last_summary">最近的天数,默认5天</string>
 
     <string name="play">抽的基数</string>
     <string name="play_summary">犯一次错抽几次，默认10次</string>
@@ -34,14 +34,17 @@
     <string name="zhi">志纲/立志向</string>
     <string name="zhi_summary">遇到不如意需立志，\n立住则是真阳木。</string>
     <string name="add">增加</string>
+    <string name="del">删除</string>
     <string name="input">请输入志向</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
+    <string name="del_click">点击删除记录</string>
+    <string name="del_ask">是否确认删除当前记录?</string>
     <!-- 义纲 -->
     <string name="yi">义纲/找好处</string>
     <string name="navigation_drawer_open">打开善人名录</string>
     <string name="navigation_drawer_close">关闭善人名录</string>
-    <string name="yi_summary">找人好处\n生人气，拿出来消气\n人生你气，拿出来宣扬</string>
+    <string name="yi_summary">找好处\n你生人气，拿出来消气\n人生你气，拿出来宣扬</string>
     <string name="googMan">善人</string>
     <string name="inputName">请输入善人姓名</string>
     <string name="inputGood">请输入善行</string>

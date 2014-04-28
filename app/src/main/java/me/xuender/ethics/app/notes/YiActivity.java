@@ -1,24 +1,14 @@
 package me.xuender.ethics.app.notes;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import me.xuender.ethics.app.R;
-import me.xuender.ethics.app.five.FiveAdapter;
 
 /**
  * 义纲
@@ -62,6 +52,9 @@ public class YiActivity extends ActionBarActivity implements ActionBar.TabListen
             case R.id.add:
                 ((NoteFragment) adapter.getItem(viewPager.getCurrentItem())).add();
                 return true;
+            case R.id.del:
+                ((NoteFragment) adapter.getItem(viewPager.getCurrentItem())).del();
+                return true;
             case android.R.id.home:
                 this.finish();
                 return true;
@@ -90,6 +83,8 @@ public class YiActivity extends ActionBarActivity implements ActionBar.TabListen
             actionBar.addTab(actionBar.newTab().setText(title).setTabListener(this));
         } else {
             actionBar.getTabAt(1).setText(title);
+            ((NoteFragment) adapter.getItem(1)).setTitle(title);
         }
+        viewPager.setCurrentItem(1);
     }
 }

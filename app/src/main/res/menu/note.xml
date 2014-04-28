@@ -7,4 +7,9 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/add"
         app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/del"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:title="@string/del"
+        app:showAsAction="ifRoom|withText" />
 </menu>
