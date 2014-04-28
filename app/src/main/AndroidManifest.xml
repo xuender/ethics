@@ -32,6 +32,6 @@
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/setting"
-            android:icon="@android:drawable/ic_menu_manage" />
+            android:icon="@drawable/ic_menu_manage" />
     </application>
 </manifest>

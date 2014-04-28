@@ -34,15 +34,15 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
     private View rootView;
     private TextView textView;
     private SharedPreferences notes;
-    private String title;
-    private String key;
+    String title;
+    String key;
     private EditText editText;
     private AlertDialog alert;
     private NoteAdapter adapter;
     private ListView listView;
-    private int input;
+    int input;
     private OnSelectNote onSelectNote;
-    private Context context;
+    Context context;
     private boolean del = false;
     private int nowPosition;
 
@@ -50,12 +50,12 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
         this.onSelectNote = onSelectNote;
     }
 
-    public NoteFragment(String title, int input, String key, Context context) {
-        this.title = title;
-        this.key = key;
-        this.input = input;
-        this.context = context;
-    }
+//    public NoteFragment(String title, int input, String key, Context context) {
+//        this.title = title;
+//        this.key = key;
+//        this.input = input;
+//        this.context = context;
+//    }
 
     public void add() {
         showAlert();
@@ -93,6 +93,7 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
             editText = new EditText(context);
             editText.setInputType(InputType.TYPE_CLASS_TEXT);
         }
+        editText.setText("");
         return editText;
     }
 

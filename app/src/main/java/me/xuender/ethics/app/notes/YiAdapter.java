@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import me.xuender.ethics.app.R;
 
+
 /**
  * Created by ender on 14-4-27.
  */
@@ -26,16 +27,22 @@ public class YiAdapter extends FragmentPagerAdapter implements OnSelectNote {
 
     public NoteFragment getNoteFragment() {
         if (noteFragment == null) {
-            noteFragment = new NoteFragment(nowNote.getTitle(), R.string.inputGood,
-                    nowNote.getTitle(), context);
+            noteFragment = new NoteFragment();
+            noteFragment.title = nowNote.getTitle();
+            noteFragment.input = R.string.inputGood;
+            noteFragment.key = nowNote.getTitle();
+            noteFragment.context = context;
         }
         return noteFragment;
     }
 
     public NoteFragment getUserFragment() {
         if (userFragment == null) {
-            userFragment = new NoteFragment(context.getString(R.string.yi_summary),
-                    R.string.inputName, "_users", context);
+            userFragment = new NoteFragment();
+            userFragment.title = context.getString(R.string.yi_summary);
+            userFragment.input = R.string.inputName;
+            userFragment.key = "_users";
+            userFragment.context = context;
             userFragment.setOnSelectNote(this);
         }
         return userFragment;

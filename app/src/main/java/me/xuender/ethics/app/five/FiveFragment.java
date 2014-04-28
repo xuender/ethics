@@ -23,7 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import me.xuender.ethics.app.EthicsApplication;
 import me.xuender.ethics.app.R;
 
 /**
