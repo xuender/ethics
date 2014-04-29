@@ -62,25 +62,51 @@
         android:layout_height="fill_parent"
         android:weightSum="3">
 
-        <Button
+        <ImageButton
             android:layout_width="0pt"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:enabled="false"
-            android:text="@string/threeType" />
+            android:src="@drawable/type_three" />
 
-        <Button
+        <ImageButton
             android:layout_width="0pt"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:enabled="false"
-            android:text="@string/fiveType" />
+            android:src="@drawable/type_five" />
 
-        <Button
+        <ImageButton
             android:layout_width="0pt"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:enabled="false"
-            android:text="@string/fourType" />
+            android:src="@drawable/type_four" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:text="@string/threeType"
+            android:layout_width="0pt"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:text="@string/fiveType"
+            android:layout_width="0pt"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:text="@string/fourType"
+            android:layout_width="0pt"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" />
     </TableRow>
 </TableLayout>

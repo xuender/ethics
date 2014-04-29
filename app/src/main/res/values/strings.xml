@@ -42,8 +42,6 @@
     <string name="del_ask">是否确认删除当前记录?</string>
     <!-- 义纲 -->
     <string name="yi">义纲/找好处</string>
-    <string name="navigation_drawer_open">打开善人名录</string>
-    <string name="navigation_drawer_close">关闭善人名录</string>
     <string name="yi_summary">找好处\n你生人气，拿出来消气\n人生你气，拿出来宣扬</string>
     <string name="googMan">善人</string>
     <string name="inputName">请输入善人姓名</string>
