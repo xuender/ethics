@@ -27,6 +27,7 @@ public class ZhiActivity extends ActionBarActivity {
         noteFragment.input = R.string.input;
         noteFragment.key = ZHI_KEY;
         noteFragment.context = this;
+        noteFragment.textColor = R.color.木;
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, noteFragment)

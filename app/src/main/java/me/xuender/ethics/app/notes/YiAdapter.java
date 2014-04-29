@@ -32,6 +32,7 @@ public class YiAdapter extends FragmentPagerAdapter implements OnSelectNote {
             noteFragment.input = R.string.inputGood;
             noteFragment.key = nowNote.getTitle();
             noteFragment.context = context;
+            noteFragment.textColor = R.color.金;
         }
         return noteFragment;
     }
@@ -43,6 +44,7 @@ public class YiAdapter extends FragmentPagerAdapter implements OnSelectNote {
             userFragment.input = R.string.inputName;
             userFragment.key = "_users";
             userFragment.context = context;
+            userFragment.textColor = R.color.金;
             userFragment.setOnSelectNote(this);
         }
         return userFragment;

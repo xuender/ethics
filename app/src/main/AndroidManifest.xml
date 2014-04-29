@@ -33,5 +33,6 @@
             android:name=".settings.SettingsActivity"
             android:label="@string/setting"
             android:icon="@drawable/ic_menu_manage" />
+        <activity android:name=".book.BookActivity" />
     </application>
 </manifest>

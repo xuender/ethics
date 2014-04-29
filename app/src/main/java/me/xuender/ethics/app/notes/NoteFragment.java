@@ -45,6 +45,7 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
     Context context;
     private boolean del = false;
     private int nowPosition;
+    int textColor = R.color.木;
 
     public void setOnSelectNote(OnSelectNote onSelectNote) {
         this.onSelectNote = onSelectNote;
@@ -111,7 +112,7 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
             textView.setText(title);
             notes = context.getSharedPreferences("notes", Context.MODE_PRIVATE);
             listView = (ListView) rootView.findViewById(R.id.listView);
-            adapter = new NoteAdapter(context, new ArrayList<Note>());
+            adapter = new NoteAdapter(context, new ArrayList<Note>(), textColor);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
             initData();

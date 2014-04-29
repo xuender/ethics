@@ -17,9 +17,11 @@ import me.xuender.ethics.app.R;
  */
 public class NoteAdapter extends ArrayAdapter<Note> {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private int textColor;
 
-    public NoteAdapter(Context context, List<Note> tests) {
+    public NoteAdapter(Context context, List<Note> tests, int textColor) {
         super(context, R.layout.note_list, tests);
+        this.textColor = textColor;
     }
 
     @Override
@@ -29,6 +31,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.note_list, null);
         }
         TextView title = (TextView) convertView.findViewById(R.id.title);
+        title.setTextColor(textColor);
         title.setText(note.getTitle());
         TextView create = (TextView) convertView.findViewById(R.id.create);
         create.setText(sdf.format(note.getCreate()));

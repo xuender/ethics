@@ -66,21 +66,21 @@
             android:layout_width="0pt"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:enabled="false"
+            android:id="@+id/type_three"
             android:src="@drawable/type_three" />
 
         <ImageButton
             android:layout_width="0pt"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:enabled="false"
+            android:id="@+id/type_five"
             android:src="@drawable/type_five" />
 
         <ImageButton
             android:layout_width="0pt"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:enabled="false"
+            android:id="@+id/type_four"
             android:src="@drawable/type_four" />
     </TableRow>
 
