@@ -199,7 +199,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         Collections.sort(tops, new Comparator<Note>() {
             @Override
             public int compare(Note lhs, Note rhs) {
-                return rhs.getTitle().compareTo(lhs.getTitle());
+                return Integer.valueOf(rhs.getTitle()) - Integer.valueOf(lhs.getTitle());
             }
         });
         while (tops.size() > 10) {
