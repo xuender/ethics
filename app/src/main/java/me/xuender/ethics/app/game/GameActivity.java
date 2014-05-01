@@ -7,6 +7,8 @@ import android.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import me.xuender.ethics.app.R;
 import me.xuender.ethics.app.five.FiveAdapter;
 
@@ -36,11 +38,25 @@ public class GameActivity extends ActionBarActivity implements ActionBar.TabList
         actionBar.addTab(actionBar.newTab().setText(R.string.game).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.top).setTabListener(this));
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         this.finish();
         return true;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);
+    }
+
     @Override
     public void onTabSelected(ActionBar.Tab tab,
                               android.support.v4.app.FragmentTransaction fragmentTransaction) {

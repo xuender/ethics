@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import org.json.JSONArray;
 
 import java.io.IOException;
@@ -70,6 +72,18 @@ public class BookActivity extends ActionBarActivity implements ActionBar.TabList
                         .setTabListener(this));
             }
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);
     }
 
     @Override

@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import me.xuender.ethics.app.R;
 
 /**
@@ -35,6 +37,17 @@ public class ZhiActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

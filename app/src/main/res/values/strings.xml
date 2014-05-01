@@ -14,7 +14,7 @@
 
     <!-- 设置 -->
     <string name="about">关于</string>
-    <string name="ver">1.G.8</string>
+    <string name="ver">1.G.9</string>
 
     <string name="clean">清零</string>
     <string name="clean_ask">请问您是否要清零今日的五毒记录?</string>

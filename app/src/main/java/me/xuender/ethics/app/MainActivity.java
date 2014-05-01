@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import me.xuender.ethics.app.book.Book;
 import me.xuender.ethics.app.book.BookActivity;
 import me.xuender.ethics.app.five.FiveActivity;
@@ -31,7 +33,17 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         findViewById(R.id.type_three).setOnClickListener(this);
         findViewById(R.id.game).setOnClickListener(this);
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);
+    }
     @Override
     public void onClick(View v) {
         Log.d("id", String.valueOf(v.getId()));
