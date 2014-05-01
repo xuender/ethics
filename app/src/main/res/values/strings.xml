@@ -6,6 +6,7 @@
     <string name="title">今天你吃五毒丸了吗？</string>
     <string name="fight">若想好病，需自责罚。\n疏导阴气，拨阴取阳。\n\n抽: </string>
     <string name="five">五毒丸</string>
+    <string name="five_summary">五毒丸/忏悔</string>
     <string name="repent">忏悔录</string>
     <string name="date">日期</string>
     <string name="count">次数</string>
@@ -13,7 +14,7 @@
 
     <!-- 设置 -->
     <string name="about">关于</string>
-    <string name="ver">1.G.5</string>
+    <string name="ver">1.G.8</string>
 
     <string name="clean">清零</string>
     <string name="clean_ask">请问您是否要清零今日的五毒记录?</string>
@@ -46,8 +47,20 @@
     <string name="googMan">善人</string>
     <string name="inputName">请输入善人姓名</string>
     <string name="inputGood">请输入善行</string>
+    <!-- 354 -->
     <string name="threeType">三界</string>
     <string name="fiveType">五行</string>
     <string name="fourType">四大界</string>
+    <!-- 游戏 -->
+    <string name="game">五行问答</string>
+    <string name="top">最高记录</string>
+    <string name="top_summary">得分最高的十条记录</string>
+    <string name="mu">木</string>
+    <string name="huo">火</string>
+    <string name="tu">土</string>
+    <string name="jin">金</string>
+    <string name="shui">水</string>
+    <string name="pass">跳过</string>
+    <string name="end">20题得分:</string>
 
 </resources>

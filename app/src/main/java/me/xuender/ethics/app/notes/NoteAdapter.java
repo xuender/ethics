@@ -1,6 +1,7 @@
 package me.xuender.ethics.app.notes;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.note_list, null);
         }
         TextView title = (TextView) convertView.findViewById(R.id.title);
-        title.setTextColor(textColor);
+        title.setTextColor(getContext().getResources().getColor(textColor));
         title.setText(note.getTitle());
         TextView create = (TextView) convertView.findViewById(R.id.create);
         create.setText(sdf.format(note.getCreate()));

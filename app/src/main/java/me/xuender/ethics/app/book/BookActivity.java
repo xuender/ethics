@@ -1,30 +1,32 @@
 package me.xuender.ethics.app.book;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
 import me.xuender.ethics.app.R;
 
 /**
  * Created by ender on 14-4-29.
  */
-public class BookActivity extends ActionBarActivity {
+public class BookActivity extends ActionBarActivity implements ActionBar.TabListener {
+    private BookAdapter bookAdapter;
+    private ViewPager viewPager;
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,64 +37,38 @@ public class BookActivity extends ActionBarActivity {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setLogo(getResources().getDrawable(bundle.getInt("icon", R.drawable.type_five)));
-        LinearLayout ll = (LinearLayout) findViewById(R.id.book);
-        try {
-            InputStream is = getAssets().open(bundle.getString("file", "three.json"));
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            JSONArray array = new JSONArray(new String(buffer, "UTF-8"));
-            Log.d("读取", "three.json");
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject obj = array.getJSONObject(i);
-                Log.d("title", obj.getString("title"));
-                TextView title = new TextView(this);
-                title.setText(obj.getString("title"));
-                title.setTextAppearance(this, android.R.style.TextAppearance_Large);
-                if (obj.has("details")) {
-                    ll.addView(title);
-                    JSONArray details = obj.getJSONArray("details");
-                    for (int f = 0; f < details.length(); f++) {
-                        JSONObject o = details.getJSONObject(f);
-                        TextView dTitle = new TextView(this);
-                        dTitle.setText(o.getString("title"));
-                        dTitle.setPadding(30, 3, 3, 3);
-                        dTitle.setTextAppearance(this, android.R.style.TextAppearance_Medium);
-
-                        TextView text = new TextView(this);
-                        text.setText(o.getString("text"));
-                        text.setTextAppearance(this, android.R.style.TextAppearance_Small);
-                        text.setPadding(5, 5, 5, 5);
-
-                        LinearLayout line = new LinearLayout(this);
-                        line.setOrientation(LinearLayout.HORIZONTAL);
-                        line.addView(dTitle);
-                        line.addView(text);
-                        ll.addView(line);
-                        //text.setPadding(5, 5, 5, 5);
-                    }
-                } else {
-                    TextView text = new TextView(this);
-                    text.setText(obj.getString("text"));
-                    text.setTextAppearance(this, android.R.style.TextAppearance_Small);
-                    text.setPadding(5, 5, 5, 5);
-                    LinearLayout line = new LinearLayout(this);
-                    line.setOrientation(LinearLayout.HORIZONTAL);
-                    line.addView(title);
-                    line.addView(text);
-                    ll.addView(line);
-                }
-                if (obj.has("summary")) {
-                    TextView summary = new TextView(this);
-                    summary.setText(obj.getString("summary"));
-                    summary.setTextAppearance(this, android.R.style.TextAppearance_Medium);
-                    summary.setPadding(30, 3, 3, 3);
-                    ll.addView(summary);
-                }
+        String[] files = bundle.getString("file", "three.json").split(",");
+        List<JSONArray> arrays = new ArrayList<JSONArray>();
+        for (String file : files) {
+            try {
+                InputStream is = null;
+                is = getAssets().open(file);
+                int size = is.available();
+                byte[] buffer = new byte[size];
+                is.read(buffer);
+                is.close();
+                JSONArray array = new JSONArray(new String(buffer, "UTF-8"));
+                arrays.add(array);
+            } catch (Exception e) {
+                Log.e("read", "error", e);
             }
-        } catch (Exception e) {
-            Log.e("read", "错误", e);
+        }
+        bookAdapter = new BookAdapter(getSupportFragmentManager(), arrays);
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setAdapter(bookAdapter);
+        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                actionBar.setSelectedNavigationItem(position);
+            }
+        });
+        if (files.length > 1) {
+            viewPager.setOffscreenPageLimit(5);
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+            for (int i = 0; i < bookAdapter.getCount(); i++) {
+                actionBar.addTab(actionBar.newTab().setText(bookAdapter.getPageTitle(i))
+                        .setTabListener(this));
+            }
         }
     }
 
@@ -100,5 +76,20 @@ public class BookActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         this.finish();
         return true;
+    }
+
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
     }
 }

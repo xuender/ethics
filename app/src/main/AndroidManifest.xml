@@ -30,6 +30,10 @@
             android:label="@string/yi"
             android:icon="@drawable/ic_yi" />
         <activity
+            android:name=".game.GameActivity"
+            android:label="@string/game"
+            android:icon="@drawable/ic_game" />
+        <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/setting"
             android:icon="@drawable/ic_menu_manage" />

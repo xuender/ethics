@@ -10,6 +10,7 @@ import android.widget.Button;
 import me.xuender.ethics.app.book.Book;
 import me.xuender.ethics.app.book.BookActivity;
 import me.xuender.ethics.app.five.FiveActivity;
+import me.xuender.ethics.app.game.GameActivity;
 import me.xuender.ethics.app.notes.YiActivity;
 import me.xuender.ethics.app.notes.ZhiActivity;
 
@@ -28,6 +29,7 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         findViewById(R.id.type_five).setOnClickListener(this);
         findViewById(R.id.type_four).setOnClickListener(this);
         findViewById(R.id.type_three).setOnClickListener(this);
+        findViewById(R.id.game).setOnClickListener(this);
     }
 
     @Override
@@ -52,6 +54,9 @@ public class MainActivity extends Activity implements Button.OnClickListener {
             case R.id.type_three:
                 runBook(Book.三界);
                 break;
+            case R.id.game:
+                runGame();
+                break;
         }
     }
 
@@ -61,6 +66,12 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         intent.putExtra("file", book.getFile());
         intent.putExtra("icon", book.getIcon());
         intent.setClass(this, BookActivity.class);
+        startActivity(intent);
+    }
+
+    private void runGame() {
+        Intent intent = new Intent();
+        intent.setClass(this, GameActivity.class);
         startActivity(intent);
     }
 
