@@ -3,7 +3,8 @@
     android:title="@string/setting">
     <Preference
         android:summary="@string/ver"
-        android:title="@string/about" />
+        android:title="@string/about"
+        android:key="ver" />
     <EditTextPreference
         android:numeric="integer"
         android:defaultValue="7"

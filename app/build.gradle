@@ -1,14 +1,16 @@
 apply plugin: 'android'
 
 android {
+    final VERSION_CODE = 13
+    final VERSION_NAME = "1.13"
     compileSdkVersion 19
     buildToolsVersion "19.0.3"
 
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 19
-        versionCode 12
-        versionName "1.G.12"
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
     }
     signingConfigs {
         release {
@@ -18,6 +20,12 @@ android {
             keyPassword System.getenv("KEY_PASSWORD")
         }
     }
+    productFlavors {  
+      qq{
+         versionCode VERSION_CODE
+         versionName VERSION_NAME + "_QQ"
+      }
+    }  
     buildTypes {
         release {
             signingConfig signingConfigs.release

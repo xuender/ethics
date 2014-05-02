@@ -2,12 +2,15 @@ package me.xuender.ethics.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
 
 import me.xuender.ethics.app.book.Book;
 import me.xuender.ethics.app.book.BookActivity;
@@ -36,6 +39,23 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         findViewById(R.id.game).setOnClickListener(this);
         findViewById(R.id.game_ext).setOnClickListener(this);
         findViewById(R.id.sex).setOnClickListener(this);
+        sendVer();
+    }
+
+    private void sendVer() {
+        // 获取packagemanager的实例
+        PackageManager packageManager = getPackageManager();
+        // getPackageName()是你当前类的包名，0代表是获取版本信息
+        try {
+            PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            EasyTracker.getInstance(this).send(MapBuilder
+                    .createEvent("mainAction",     // Event category (required)
+                            "ver",  // Event action (required)
+                            packInfo.versionName,   // Event label
+                            null).build());
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
