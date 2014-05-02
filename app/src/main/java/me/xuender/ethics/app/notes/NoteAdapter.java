@@ -17,12 +17,19 @@ import me.xuender.ethics.app.R;
  * Created by ender on 14-4-27.
  */
 public class NoteAdapter extends ArrayAdapter<Note> {
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private SimpleDateFormat sdf;
     private int textColor;
 
     public NoteAdapter(Context context, List<Note> tests, int textColor) {
         super(context, R.layout.note_list, tests);
         this.textColor = textColor;
+        sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    }
+
+    public NoteAdapter(Context context, List<Note> tests, int textColor, String format) {
+        super(context, R.layout.note_list, tests);
+        this.textColor = textColor;
+        sdf = new SimpleDateFormat(format);
     }
 
     @Override

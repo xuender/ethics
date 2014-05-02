@@ -5,6 +5,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="day">
+        <item name="android:textSize">12dp</item>
+    </style>
+
     <color name="木">#ff00af00</color>
     <color name="火">#ffaf0000</color>
     <color name="土">#ffafaf00</color>

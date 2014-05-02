@@ -510,7 +510,7 @@ public final class ChineseCalendar extends GregorianCalendar {
     /**
      * 使用公历日期计算出农历日期
      */
-    private void computeChineseFields() {
+    void computeChineseFields() {
         int gregorianYear = internalGet(Calendar.YEAR);
         int gregorianMonth = internalGet(Calendar.MONTH) + 1;
         int gregorianDate = internalGet(Calendar.DATE);
@@ -967,6 +967,26 @@ public final class ChineseCalendar extends GregorianCalendar {
     private static Map<String, String> sFestival = new HashMap<String, String>();
     // 农历介入
     private static Map<String, String> lFestival = new HashMap<String, String>();
+
+    /**
+     * 增加阳历节日
+     *
+     * @param day
+     * @param title
+     */
+    public static void addS(String day, String title) {
+        sFestival.put(day, title);
+    }
+
+    /**
+     * 增加阴历节日
+     *
+     * @param day
+     * @param title
+     */
+    public static void addL(String day, String title) {
+        lFestival.put(day, title);
+    }
 
     static {
         sFestival.put("0101", "元旦");

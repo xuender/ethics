@@ -66,5 +66,12 @@
     <!-- 生理宝录 -->
     <string name="sex">生理宝录</string>
     <string name="no_sex">每日1点前、5-7点、11-13点、\n17-19点、23点后(子午卯酉)，\n元气在体内化合禁止交媾！</string>
+    <string name="calendar">日历</string>
+    <string name="birthday">生辰忌日</string>
+    <string name="birthday_summary">双方父母的生辰忌日</string>
+    <string name="binput">输入名称，选择公历日期</string>
+    <string name="yin">农:</string>
+    <string name="yang">公:</string>
+    <string name="format">"公历:yyyy年MM月dd日"</string>
 
 </resources>
