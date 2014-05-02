@@ -50,6 +50,16 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private Question question;
     private SharedPreferences sp;
     private OnAddPoint onAddPoint;
+    private String key = "top";
+    private boolean ext = false;
+
+    public void setExt(boolean ext) {
+        Log.d("ext", String.valueOf(ext));
+        this.ext = ext;
+        if (ext) {
+            key = "ext";
+        }
+    }
 
     public void setOnAddPoint(OnAddPoint onAddPoint) {
         this.onAddPoint = onAddPoint;
@@ -88,7 +98,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 is.read(buffer);
                 is.close();
                 JSONArray array = new JSONArray(new String(buffer, "UTF-8"));
-                readArray(entry, array);
+                readArray(entry, array, ext);
             } catch (Exception e) {
                 Log.e("read", "error", e);
             }
@@ -117,7 +127,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         b6.setText(R.string.pass);
         b6.setOnClickListener(this);
         try {
-            JSONArray array = new JSONArray(sp.getString("top", "[]"));
+            JSONArray array = new JSONArray(sp.getString(key, "[]"));
             for (int i = 0; i < array.length(); i++) {
                 JSONObject obj = array.getJSONObject(i);
                 Note note = new Note();
@@ -132,24 +142,30 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         show();
     }
 
-    private void readArray(Map.Entry<Integer, String> entry, JSONArray array) throws JSONException {
+    private void readArray(Map.Entry<Integer, String> entry, JSONArray array, boolean isExt)
+            throws JSONException {
         for (int i = 0; i < array.length(); i++) {
             JSONObject obj = array.getJSONObject(i);
             String title = obj.getString("title");
+            if (isExt && !"五行扩展".equals(title) || !isExt && "五行扩展".equals(title)) {
+                continue;
+            }
             if (obj.has("text")) {
-                for (String text : obj.getString("text").split("，")) {
-                    list.add(getQuestion(title + "\n" + text, entry.getKey()));
+                for (String text : obj.getString("text").split("，|。")) {
+                    if (text.length() > 0) {
+                        list.add(getQuestion(title + "\n" + text.trim(), entry.getKey()));
+                    }
                 }
             }
             if (obj.has("details")) {
-                readArray(entry, obj.getJSONArray("details"));
+                readArray(entry, obj.getJSONArray("details"), false);
             }
         }
     }
 
     private Question getQuestion(String title, int id) {
         Question q = new Question();
-        q.title = title.replaceAll("。", "").replaceAll("金|木|水|火|土", "_");
+        q.title = title.replaceAll("金|木|水|火|土", "_");
         q.xing = id;
         return q;
     }
@@ -218,7 +234,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 e.printStackTrace();
             }
         }
-        editor.putString("top", array.toString());
+        editor.putString(key, array.toString());
         editor.commit();
     }
 

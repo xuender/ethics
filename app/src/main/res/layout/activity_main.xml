@@ -121,6 +121,20 @@
             android:layout_weight="1"
             android:id="@+id/game"
             android:src="@drawable/ic_game" />
+
+        <ImageButton
+            android:layout_width="0pt"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/game_ext"
+            android:src="@drawable/ic_game" />
+
+        <ImageButton
+            android:layout_width="0pt"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/sex"
+            android:src="@drawable/ic_tj" />
     </TableRow>
 
     <TableRow
@@ -130,6 +144,20 @@
 
         <TextView
             android:text="@string/game"
+            android:layout_width="0pt"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:text="@string/game_ext"
+            android:layout_width="0pt"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:text="@string/sex"
             android:layout_width="0pt"
             android:layout_height="wrap_content"
             android:layout_weight="1"

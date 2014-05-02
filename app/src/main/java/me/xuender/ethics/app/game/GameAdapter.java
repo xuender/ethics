@@ -11,11 +11,12 @@ public class GameAdapter extends FragmentPagerAdapter {
     private GameFragment gameFragment;
     private TopFragment topFragment;
 
-    public GameAdapter(FragmentManager fm) {
+    public GameAdapter(FragmentManager fm, boolean ext) {
         super(fm);
         topFragment = new TopFragment();
         gameFragment = new GameFragment();
         gameFragment.setOnAddPoint(topFragment);
+        gameFragment.setExt(ext);
     }
 
     @Override

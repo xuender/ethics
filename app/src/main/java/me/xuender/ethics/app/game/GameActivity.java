@@ -3,14 +3,12 @@ package me.xuender.ethics.app.game;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
 import me.xuender.ethics.app.R;
-import me.xuender.ethics.app.five.FiveAdapter;
 
 /**
  * Created by ender on 14-5-1.
@@ -26,7 +24,12 @@ public class GameActivity extends ActionBarActivity implements ActionBar.TabList
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        gameAdapter = new GameAdapter(getSupportFragmentManager());
+        Bundle bundle = this.getIntent().getExtras();
+        boolean ext = bundle.getBoolean("ext");
+        if (ext) {
+            setTitle(R.string.game_ext);
+        }
+        gameAdapter = new GameAdapter(getSupportFragmentManager(), ext);
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(gameAdapter);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -35,7 +38,11 @@ public class GameActivity extends ActionBarActivity implements ActionBar.TabList
                 actionBar.setSelectedNavigationItem(position);
             }
         });
-        actionBar.addTab(actionBar.newTab().setText(R.string.game).setTabListener(this));
+        if (ext) {
+            actionBar.addTab(actionBar.newTab().setText(R.string.game_ext).setTabListener(this));
+        } else {
+            actionBar.addTab(actionBar.newTab().setText(R.string.game).setTabListener(this));
+        }
         actionBar.addTab(actionBar.newTab().setText(R.string.top).setTabListener(this));
     }
 

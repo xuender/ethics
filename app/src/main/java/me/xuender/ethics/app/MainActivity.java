@@ -15,6 +15,7 @@ import me.xuender.ethics.app.five.FiveActivity;
 import me.xuender.ethics.app.game.GameActivity;
 import me.xuender.ethics.app.notes.YiActivity;
 import me.xuender.ethics.app.notes.ZhiActivity;
+import me.xuender.ethics.app.sex.SexActivity;
 
 /**
  * 首页
@@ -32,7 +33,10 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         findViewById(R.id.type_four).setOnClickListener(this);
         findViewById(R.id.type_three).setOnClickListener(this);
         findViewById(R.id.game).setOnClickListener(this);
+        findViewById(R.id.game_ext).setOnClickListener(this);
+        findViewById(R.id.sex).setOnClickListener(this);
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -44,6 +48,7 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         super.onStop();
         EasyTracker.getInstance(this).activityStop(this);
     }
+
     @Override
     public void onClick(View v) {
         Log.d("id", String.valueOf(v.getId()));
@@ -67,7 +72,13 @@ public class MainActivity extends Activity implements Button.OnClickListener {
                 runBook(Book.三界);
                 break;
             case R.id.game:
-                runGame();
+                runGame(false);
+                break;
+            case R.id.game_ext:
+                runGame(true);
+                break;
+            case R.id.sex:
+                runSex();
                 break;
         }
     }
@@ -81,9 +92,16 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         startActivity(intent);
     }
 
-    private void runGame() {
+    private void runGame(boolean ext) {
         Intent intent = new Intent();
+        intent.putExtra("ext", ext);
         intent.setClass(this, GameActivity.class);
+        startActivity(intent);
+    }
+
+    private void runSex() {
+        Intent intent = new Intent();
+        intent.setClass(this, SexActivity.class);
         startActivity(intent);
     }
 
