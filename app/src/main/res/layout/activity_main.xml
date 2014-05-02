@@ -119,6 +119,13 @@
             android:layout_width="0pt"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:id="@+id/five_ext"
+            android:src="@drawable/type_five" />
+
+        <ImageButton
+            android:layout_width="0pt"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:id="@+id/game"
             android:src="@drawable/ic_game" />
 
@@ -129,18 +136,19 @@
             android:id="@+id/game_ext"
             android:src="@drawable/ic_game" />
 
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/sex"
-            android:src="@drawable/ic_tj" />
     </TableRow>
 
     <TableRow
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:weightSum="3">
+
+        <TextView
+            android:text="@string/extFiveType"
+            android:layout_width="0pt"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" />
 
         <TextView
             android:text="@string/game"
@@ -156,6 +164,28 @@
             android:layout_weight="1"
             android:gravity="center" />
 
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:weightSum="3">
+
+        <ImageButton
+            android:layout_width="0pt"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/sex"
+            android:src="@drawable/ic_tj" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:weightSum="3">
+
+
         <TextView
             android:text="@string/sex"
             android:layout_width="0pt"
@@ -164,4 +194,5 @@
             android:gravity="center" />
 
     </TableRow>
+
 </TableLayout>

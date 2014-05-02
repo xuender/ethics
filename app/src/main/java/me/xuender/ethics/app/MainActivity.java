@@ -30,6 +30,7 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         findViewById(R.id.zhi).setOnClickListener(this);
         findViewById(R.id.yi).setOnClickListener(this);
         findViewById(R.id.type_five).setOnClickListener(this);
+        findViewById(R.id.five_ext).setOnClickListener(this);
         findViewById(R.id.type_four).setOnClickListener(this);
         findViewById(R.id.type_three).setOnClickListener(this);
         findViewById(R.id.game).setOnClickListener(this);
@@ -70,6 +71,9 @@ public class MainActivity extends Activity implements Button.OnClickListener {
                 break;
             case R.id.type_three:
                 runBook(Book.三界);
+                break;
+            case R.id.five_ext:
+                runBook(Book.五行扩展);
                 break;
             case R.id.game:
                 runGame(false);

@@ -45,6 +45,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private TextView textView;
     private SoundPool soundPool;
     private List<Question> list = new ArrayList<Question>();
+    private List<Question> bak = new ArrayList<Question>();
     private int point = 0;
     private int count = 0;
     private Question question;
@@ -76,6 +77,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             声音初始化();
             init();
+
             onAddPoint.add(tops);
         }
         return rootView;
@@ -92,7 +94,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         for (Map.Entry<Integer, String> entry : map.entrySet()) {
             try {
                 InputStream is = null;
-                is = getActivity().getAssets().open(entry.getValue());
+                String fileName = entry.getValue();
+                if (ext) {
+                    fileName = "ext_" + fileName;
+                }
+                is = getActivity().getAssets().open(fileName);
                 int size = is.available();
                 byte[] buffer = new byte[size];
                 is.read(buffer);
@@ -139,6 +145,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        bak.addAll(list);
         show();
     }
 
@@ -147,9 +154,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         for (int i = 0; i < array.length(); i++) {
             JSONObject obj = array.getJSONObject(i);
             String title = obj.getString("title");
-            if (isExt && !"五行扩展".equals(title) || !isExt && "五行扩展".equals(title)) {
-                continue;
-            }
             if (obj.has("text")) {
                 for (String text : obj.getString("text").split("，|。")) {
                     if (text.length() > 0) {
@@ -204,6 +208,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         } else {
             textView.setText(getString(R.string.end) + "\n" + point);
             save();
+            list.clear();
+            list.addAll(bak);
         }
     }
 

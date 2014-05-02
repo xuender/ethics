@@ -14,7 +14,7 @@
 
     <!-- 设置 -->
     <string name="about">关于</string>
-    <string name="ver">1.G.10</string>
+    <string name="ver">1.G.12</string>
 
     <string name="clean">清零</string>
     <string name="clean_ask">请问您是否要清零今日的五毒记录?</string>
@@ -50,7 +50,9 @@
     <!-- 354 -->
     <string name="threeType">三界</string>
     <string name="fiveType">五行</string>
+    <string name="extFiveType">五行扩展</string>
     <string name="fourType">四大界</string>
+
     <!-- 游戏 -->
     <string name="game">五行问答</string>
     <string name="game_ext">五行扩展问答</string>
@@ -61,8 +63,9 @@
     <string name="tu">土</string>
     <string name="jin">金</string>
     <string name="shui">水</string>
-    <string name="pass">不会</string>
+    <string name="pass">过</string>
     <string name="end">20题得分:</string>
+
     <!-- 生理宝录 -->
     <string name="sex">生理宝录</string>
     <string name="no_sex">每日1点前、5-7点、11-13点、\n17-19点、23点后(子午卯酉)，\n元气在体内化合禁止交媾！</string>
