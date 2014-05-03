@@ -30,19 +30,19 @@ import me.xuender.ethics.app.R;
 /**
  * Created by ender on 14-5-3.
  */
-public class CallActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener,
-        TimePicker.OnTimeChangedListener, CompoundButton.OnCheckedChangeListener {
+public class CallActivity extends ActionBarActivity implements TimePicker.OnTimeChangedListener,
+        CompoundButton.OnCheckedChangeListener {
     private SharedPreferences prefs;
     private TimePicker timePicker;
     private Switch aSwitch;
-    private Spinner spinner;
-    private ArrayAdapter<String> adapter;
+    private Spinner soundSpinner, numberSpinner;
     private boolean enabled;
-    private int hour, minute, select;
+    private int hour, minute, sound, number;
     private final static String H_KEY = "hour";
     private final static String M_KEY = "minute";
-    private final static String S_KEY = "spinner";
+    final static String S_KEY = "playSound";
     private final static String E_KEY = "enabled";
+    final static String N_KEY = "playNumber";
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
@@ -64,15 +64,50 @@ public class CallActivity extends ActionBarActivity implements AdapterView.OnIte
         enabled = prefs.getBoolean(E_KEY, false);
         aSwitch.setChecked(enabled);
         aSwitch.setOnCheckedChangeListener(this);
-        spinner = (Spinner) findViewById(R.id.spinner);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+
+        soundSpinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
                 new String[]{getString(R.string.s1), getString(R.string.s2)});
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setVisibility(View.VISIBLE);
-        select = prefs.getInt(S_KEY, 0);
-        spinner.setSelection(select);
-        spinner.setOnItemSelectedListener(this);
+        soundSpinner.setAdapter(adapter);
+        soundSpinner.setVisibility(View.VISIBLE);
+        sound = prefs.getInt(S_KEY, 0);
+        soundSpinner.setSelection(sound);
+        soundSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sound = position;
+                save();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        numberSpinner = (Spinner) findViewById(R.id.num);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+                new String[]{getString(R.string.n1), getString(R.string.n2), getString(R.string.n3)});
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        numberSpinner.setAdapter(adapter2);
+        numberSpinner.setVisibility(View.VISIBLE);
+        number = prefs.getInt(N_KEY, 0);
+        numberSpinner.setSelection(number);
+        numberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                number = position;
+                save();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -91,17 +126,6 @@ public class CallActivity extends ActionBarActivity implements AdapterView.OnIte
     public boolean onOptionsItemSelected(MenuItem item) {
         this.finish();
         return true;
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        select = position;
-        save();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     @Override
@@ -131,7 +155,9 @@ public class CallActivity extends ActionBarActivity implements AdapterView.OnIte
         am.cancel(pendIntent);
         if (enabled) {
             // 定时
-            intent.putExtra("sound", SOUNDS[select]);
+            Log.d("SOUNDS sound", String.valueOf(sound));
+            intent.putExtra(S_KEY, SOUNDS[sound]);
+            intent.putExtra(N_KEY, (number + 1) * 3);
             Calendar c = Calendar.getInstance();
             c.setTimeZone(TimeZone.getTimeZone("GMT+8"));
             c.set(Calendar.HOUR_OF_DAY, hour);
@@ -153,8 +179,9 @@ public class CallActivity extends ActionBarActivity implements AdapterView.OnIte
         editor.putBoolean(E_KEY, enabled);
         if (enabled) {
             editor.putInt(H_KEY, hour);
-            editor.putInt(M_KEY, this.minute);
-            editor.putInt(S_KEY, select);
+            editor.putInt(M_KEY, minute);
+            editor.putInt(S_KEY, sound);
+            editor.putInt(N_KEY, number);
         }
         editor.commit();
         reg();

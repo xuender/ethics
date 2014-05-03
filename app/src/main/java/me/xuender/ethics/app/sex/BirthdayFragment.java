@@ -67,7 +67,6 @@ public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInte
             datePicker = new DatePicker(getActivity());
             linearLayout.addView(datePicker);
         }
-        editText.setText("");
         return linearLayout;
     }
 
@@ -81,6 +80,7 @@ public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInte
             builder.setNegativeButton(R.string.cancel, null);
             alert = builder.show();
         }
+        editText.setText("");
         alert.show();
         return alert;
     }

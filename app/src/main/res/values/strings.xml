@@ -83,4 +83,7 @@
     <string name="on">开启</string>
     <string name="s1">钟声</string>
     <string name="s2">耳光</string>
+    <string name="n1">三次</string>
+    <string name="n2">六次</string>
+    <string name="n3">九次</string>
 </resources>

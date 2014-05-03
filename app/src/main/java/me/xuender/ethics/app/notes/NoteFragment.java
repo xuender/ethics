@@ -77,6 +77,7 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
             builder.setNegativeButton(R.string.cancel, null);
             alert = builder.show();
         }
+        editText.setText("");
         alert.show();
         return alert;
     }
@@ -94,7 +95,6 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
             editText = new EditText(context);
             editText.setInputType(InputType.TYPE_CLASS_TEXT);
         }
-        editText.setText("");
         return editText;
     }
 
