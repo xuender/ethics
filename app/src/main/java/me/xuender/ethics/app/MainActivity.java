@@ -14,6 +14,7 @@ import com.google.analytics.tracking.android.MapBuilder;
 
 import me.xuender.ethics.app.book.Book;
 import me.xuender.ethics.app.book.BookActivity;
+import me.xuender.ethics.app.call.CallActivity;
 import me.xuender.ethics.app.five.FiveActivity;
 import me.xuender.ethics.app.game.GameActivity;
 import me.xuender.ethics.app.notes.YiActivity;
@@ -39,6 +40,7 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         findViewById(R.id.game).setOnClickListener(this);
         findViewById(R.id.game_ext).setOnClickListener(this);
         findViewById(R.id.sex).setOnClickListener(this);
+        findViewById(R.id.call).setOnClickListener(this);
         sendVer();
     }
 
@@ -104,7 +106,16 @@ public class MainActivity extends Activity implements Button.OnClickListener {
             case R.id.sex:
                 runSex();
                 break;
+            case R.id.call:
+                runCall();
+                break;
         }
+    }
+
+    private void runCall() {
+        Intent intent = new Intent();
+        intent.setClass(this, CallActivity.class);
+        startActivity(intent);
     }
 
     private void runBook(Book book) {

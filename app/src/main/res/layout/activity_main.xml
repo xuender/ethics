@@ -1,198 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout
+<ScrollView
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="3">
-
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/type_three"
-            android:src="@drawable/type_three" />
-
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/type_five"
-            android:src="@drawable/type_five" />
-
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/type_four"
-            android:src="@drawable/type_four" />
-    </TableRow>
-
-    <TableRow
+    <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <TextView
-            android:text="@string/threeType"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="3">
 
-        <TextView
-            android:text="@string/fiveType"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/type_three"
+                android:src="@drawable/type_three" />
 
-        <TextView
-            android:text="@string/fourType"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
-    </TableRow>
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/type_five"
+                android:src="@drawable/type_five" />
 
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="3">
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/type_four"
+                android:src="@drawable/type_four" />
+        </TableRow>
 
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/five"
-            android:src="@drawable/ic_five" />
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/ic_yi"
-            android:id="@+id/yi" />
+            <TextView
+                android:text="@string/threeType"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
 
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/ic_zhi"
-            android:id="@+id/zhi" />
-    </TableRow>
+            <TextView
+                android:text="@string/fiveType"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
 
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+            <TextView
+                android:text="@string/fourType"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </TableRow>
 
-        <TextView
-            android:text="@string/five_summary"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="3">
 
-        <TextView
-            android:text="@string/yi"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/five"
+                android:src="@drawable/ic_five" />
 
-        <TextView
-            android:text="@string/zhi"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
-    </TableRow>
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_yi"
+                android:id="@+id/yi" />
 
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="3">
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_zhi"
+                android:id="@+id/zhi" />
+        </TableRow>
 
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/five_ext"
-            android:src="@drawable/type_five" />
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/game"
-            android:src="@drawable/ic_game" />
+            <TextView
+                android:text="@string/five_summary"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
 
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/game_ext"
-            android:src="@drawable/ic_game" />
+            <TextView
+                android:text="@string/yi"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
 
-    </TableRow>
+            <TextView
+                android:text="@string/zhi"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </TableRow>
 
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="3">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="3">
 
-        <TextView
-            android:text="@string/extFiveType"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/five_ext"
+                android:src="@drawable/type_five" />
 
-        <TextView
-            android:text="@string/game"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/game"
+                android:src="@drawable/ic_game" />
 
-        <TextView
-            android:text="@string/game_ext"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/game_ext"
+                android:src="@drawable/ic_game" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="3">
+
+            <TextView
+                android:text="@string/extFiveType"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:text="@string/game"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:text="@string/game_ext"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
 
 
-    </TableRow>
+        </TableRow>
 
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="3">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="3">
 
-        <ImageButton
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/sex"
-            android:src="@drawable/ic_tj" />
-    </TableRow>
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/call"
+                android:src="@drawable/ic_call" />
 
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="3">
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/sex"
+                android:src="@drawable/ic_tj" />
+        </TableRow>
 
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="3">
 
-        <TextView
-            android:text="@string/sex"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
+            <TextView
+                android:text="@string/call"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
 
-    </TableRow>
+            <TextView
+                android:text="@string/sex"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
 
-</TableLayout>
+        </TableRow>
+    </TableLayout>
+</ScrollView>

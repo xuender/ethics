@@ -76,5 +76,13 @@
     <string name="yin">农:</string>
     <string name="yang">公:</string>
     <string name="format">"公历:yyyy年MM月dd日"</string>
-
+    <!-- 叫性 -->
+    <string name="call">叫性</string>
+    <string name="call_summary">早上起来真清净，\n大家一起来叫性。</string>
+    <string name="timed">定时提醒</string>
+    <string name="off">关闭</string>
+    <string name="on">开启</string>
+    <string name="s1">钟声</string>
+    <string name="s2">佛号</string>
+    <string name="s3">耳光</string>
 </resources>

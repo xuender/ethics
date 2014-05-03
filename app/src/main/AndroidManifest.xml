@@ -38,10 +38,20 @@
             android:label="@string/sex"
             android:icon="@drawable/ic_tj" />
         <activity
+            android:name=".call.CallActivity"
+            android:label="@string/call"
+            android:icon="@drawable/ic_call" />
+        <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/setting"
             android:icon="@drawable/ic_menu_manage" />
         <activity android:name=".book.BookActivity" />
+
+        <receiver android:name=".call.CallReceiver">
+            <intent-filter>
+                <action android:name="me.xuender.ethics.app.call" />
+            </intent-filter>
+        </receiver>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

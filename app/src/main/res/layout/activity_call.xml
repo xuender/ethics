@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="15">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0pt"
+        android:layout_weight="4"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/call_summary"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:padding="10pt" />
+
+    <TimePicker
+        android:layout_height="0pt"
+        android:layout_weight="6"
+        android:layout_width="match_parent"
+        android:id="@+id/timePicker"
+        android:padding="10pt" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="0pt"
+        android:layout_weight="2"
+        android:id="@+id/spinner"
+        android:padding="10pt" />
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="0pt"
+        android:layout_weight="3"
+        android:text="@string/timed"
+        android:id="@+id/switch1"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        android:padding="10pt" />
+</LinearLayout>

@@ -1,8 +1,8 @@
 apply plugin: 'android'
 
 android {
-    final VERSION_CODE = 13
-    final VERSION_NAME = "1.13"
+    final VERSION_CODE = 15
+    final VERSION_NAME = "1.15"
     compileSdkVersion 19
     buildToolsVersion "19.0.3"
 
@@ -21,6 +21,10 @@ android {
         }
     }
     productFlavors {  
+      play{
+         versionCode VERSION_CODE
+         versionName VERSION_NAME
+      }
       qq{
          versionCode VERSION_CODE
          versionName VERSION_NAME + "_QQ"
