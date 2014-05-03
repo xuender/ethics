@@ -2,7 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/setting">
     <Preference
-        android:summary="@string/ver"
         android:title="@string/about"
         android:key="ver" />
     <EditTextPreference

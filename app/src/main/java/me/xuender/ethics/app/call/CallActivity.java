@@ -3,7 +3,6 @@ package me.xuender.ethics.app.call;
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -11,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,6 +39,10 @@ public class CallActivity extends ActionBarActivity implements AdapterView.OnIte
     private ArrayAdapter<String> adapter;
     private boolean enabled;
     private int hour, minute, select;
+    private final static String H_KEY = "hour";
+    private final static String M_KEY = "minute";
+    private final static String S_KEY = "spinner";
+    private final static String E_KEY = "enabled";
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
@@ -49,22 +53,24 @@ public class CallActivity extends ActionBarActivity implements AdapterView.OnIte
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
-        hour = prefs.getInt("hour", 5);
+        hour = prefs.getInt(H_KEY, 5);
+        Log.d("hour", String.valueOf(hour));
+        timePicker.setIs24HourView(true);
         timePicker.setCurrentHour(hour);
-        minute = prefs.getInt("minute", 21);
+        minute = prefs.getInt(M_KEY, 21);
         timePicker.setCurrentMinute(minute);
         timePicker.setOnTimeChangedListener(this);
         aSwitch = (Switch) findViewById(R.id.switch1);
-        enabled = prefs.getBoolean("enabled", false);
+        enabled = prefs.getBoolean(E_KEY, false);
         aSwitch.setChecked(enabled);
         aSwitch.setOnCheckedChangeListener(this);
         spinner = (Spinner) findViewById(R.id.spinner);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
-                new String[]{"钟声", "佛号", "耳光"});
+                new String[]{getString(R.string.s1), getString(R.string.s2)});
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setVisibility(View.VISIBLE);
-        select = prefs.getInt("spinner", 0);
+        select = prefs.getInt(S_KEY, 0);
         spinner.setSelection(select);
         spinner.setOnItemSelectedListener(this);
     }
@@ -102,11 +108,12 @@ public class CallActivity extends ActionBarActivity implements AdapterView.OnIte
     public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
         hour = hourOfDay;
         this.minute = minute;
+        Log.d("H+M", hourOfDay + ":" + minute);
         save();
     }
 
     private static final int CALL_ID = 0;
-    private static final int[] SOUNDS = {R.raw.bell, R.raw.bell, R.raw.play};
+    private static final int[] SOUNDS = {R.raw.bell, R.raw.play};
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -116,8 +123,8 @@ public class CallActivity extends ActionBarActivity implements AdapterView.OnIte
 
     private void reg() {
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Intent intent = new Intent("me.xuender.ethics.app.call");
-        intent.setClass(this, CallReceiver.class);
+        Intent intent = new Intent(this, CallReceiver.class);
+        intent.setAction("me.xuender.ethics.app.call");
         // 取消定时
         PendingIntent pendIntent = PendingIntent.getBroadcast(this, CALL_ID, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
@@ -127,24 +134,27 @@ public class CallActivity extends ActionBarActivity implements AdapterView.OnIte
             intent.putExtra("sound", SOUNDS[select]);
             Calendar c = Calendar.getInstance();
             c.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-            c.set(Calendar.HOUR, hour);
+            c.set(Calendar.HOUR_OF_DAY, hour);
             c.set(Calendar.MINUTE, minute);
             if (c.getTimeInMillis() < System.currentTimeMillis()) {
                 c.add(Calendar.DATE, 1);
             }
             PendingIntent pi = PendingIntent.getBroadcast(this, CALL_ID, intent,
-                    PendingIntent.FLAG_CANCEL_CURRENT);
-            am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+            am.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 1000 * 60 * 60 * 24, pi);
+            Log.d("System", String.valueOf(System.currentTimeMillis()));
+            Log.d("getTimeInMillis", String.valueOf(c.getTimeInMillis()));
+            Log.d("setup", "RTC_WAKEUP");
         }
     }
 
     private void save() {
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("enabled", enabled);
+        editor.putBoolean(E_KEY, enabled);
         if (enabled) {
-            editor.putInt("hour", hour);
-            editor.putInt("minute", this.minute);
-            editor.putInt("spinner", select);
+            editor.putInt(H_KEY, hour);
+            editor.putInt(M_KEY, this.minute);
+            editor.putInt(S_KEY, select);
         }
         editor.commit();
         reg();

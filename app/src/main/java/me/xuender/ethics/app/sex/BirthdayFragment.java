@@ -57,7 +57,7 @@ public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInte
         showAlert();
     }
 
-    private LinearLayout getEditText() {
+    private LinearLayout getLinearLayout() {
         if (linearLayout == null) {
             linearLayout = new LinearLayout(getActivity());
             linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -76,7 +76,7 @@ public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInte
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(R.string.binput);
             builder.setIcon(android.R.drawable.stat_sys_warning);
-            builder.setView(getEditText());
+            builder.setView(getLinearLayout());
             builder.setPositiveButton(R.string.ok, this);
             builder.setNegativeButton(R.string.cancel, null);
             alert = builder.show();
