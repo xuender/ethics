@@ -1,8 +1,8 @@
 apply plugin: 'android'
 
 android {
-    final VERSION_CODE = 16
-    final VERSION_NAME = "1.16"
+    final VERSION_CODE = 17
+    final VERSION_NAME = "1.17"
     compileSdkVersion 19
     buildToolsVersion "19.0.3"
 
@@ -20,24 +20,40 @@ android {
             keyPassword System.getenv("KEY_PASSWORD")
         }
     }
-    productFlavors {  
-      play{
-         versionCode VERSION_CODE
-         versionName VERSION_NAME
-      }
-      b31{
-         versionCode VERSION_CODE
-         versionName VERSION_NAME + "_31"
-      }
-      qq{
-         versionCode VERSION_CODE
-         versionName VERSION_NAME + "_QQ"
-      }
-    }  
+    productFlavors {
+        b31 {
+            versionCode VERSION_CODE
+            versionName VERSION_NAME + "_31"
+        }
+        yd {
+            versionCode VERSION_CODE
+            versionName VERSION_NAME + "_YD"
+        }
+        wdj {
+            versionCode VERSION_CODE
+            versionName VERSION_NAME + "_WDJ"
+        }
+        b360 {
+            versionCode VERSION_CODE
+            versionName VERSION_NAME + "_360"
+        }
+        wo {
+            versionCode VERSION_CODE
+            versionName VERSION_NAME + "_WO"
+        }
+        qq {
+            versionCode VERSION_CODE
+            versionName VERSION_NAME + "_QQ"
+        }
+        play {
+            versionCode VERSION_CODE
+            versionName VERSION_NAME
+        }
+    }
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            runProguard true  
+            runProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
 

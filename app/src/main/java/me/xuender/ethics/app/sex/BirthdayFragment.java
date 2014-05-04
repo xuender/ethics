@@ -27,6 +27,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -130,6 +132,12 @@ public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInte
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void add(List<Note> notes) {
+        Collections.sort(notes, new Comparator<Note>() {
+            @Override
+            public int compare(Note lhs, Note rhs) {
+                return Long.valueOf(rhs.getCreate().getTime() - lhs.getCreate().getTime()).intValue();
+            }
+        });
         if (adapter == null) {
             tops = notes;
         } else {

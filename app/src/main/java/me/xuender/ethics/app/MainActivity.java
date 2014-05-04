@@ -1,11 +1,13 @@
 package me.xuender.ethics.app;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,13 +21,14 @@ import me.xuender.ethics.app.five.FiveActivity;
 import me.xuender.ethics.app.game.GameActivity;
 import me.xuender.ethics.app.notes.YiActivity;
 import me.xuender.ethics.app.notes.ZhiActivity;
+import me.xuender.ethics.app.settings.SettingsActivity;
 import me.xuender.ethics.app.sex.SexActivity;
 
 /**
  * 首页
  * Created by ender on 14-4-27.
  */
-public class MainActivity extends Activity implements Button.OnClickListener {
+public class MainActivity extends ActionBarActivity implements Button.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,20 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = new Intent();
+        intent.setClass(this, SettingsActivity.class);
+        startActivity(intent);
+        return true;
     }
 
     @Override

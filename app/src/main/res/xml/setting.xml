@@ -2,22 +2,23 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/setting">
     <Preference
-        android:title="@string/about"
+        android:title="@string/ver"
         android:key="ver" />
-    <EditTextPreference
-        android:numeric="integer"
-        android:defaultValue="7"
+    <ListPreference
         android:title="@string/last"
-        android:summary="@string/last_summary"
+        android:entryValues="@array/last"
+        android:entries="@array/last"
+        android:defaultValue="5"
         android:key="last"
-        android:inputType="number" />
-    <EditTextPreference
-        android:numeric="integer"
-        android:defaultValue="10"
+        android:summary="@string/last_summary" />
+    <ListPreference
         android:title="@string/play"
-        android:summary="@string/play_summary"
+        android:entryValues="@array/play"
+        android:defaultValue="10"
+        android:entries="@array/play"
         android:key="play"
-        android:inputType="number" />
+        android:summary="@string/play_summary" />
+
     <SwitchPreference
         android:defaultValue="true"
         android:key="sound"

@@ -66,8 +66,9 @@ public class CallActivity extends ActionBarActivity implements TimePicker.OnTime
         aSwitch.setOnCheckedChangeListener(this);
 
         soundSpinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
-                new String[]{getString(R.string.s1), getString(R.string.s2)});
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.sounds));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         soundSpinner.setAdapter(adapter);
         soundSpinner.setVisibility(View.VISIBLE);
@@ -88,8 +89,9 @@ public class CallActivity extends ActionBarActivity implements TimePicker.OnTime
         });
 
         numberSpinner = (Spinner) findViewById(R.id.num);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
-                new String[]{getString(R.string.n1), getString(R.string.n2), getString(R.string.n3)});
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.number));
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         numberSpinner.setAdapter(adapter2);
         numberSpinner.setVisibility(View.VISIBLE);

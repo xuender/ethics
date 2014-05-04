@@ -8,6 +8,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,6 +54,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private OnAddPoint onAddPoint;
     private String key = "top";
     private boolean ext = false;
+    private SharedPreferences prefs;
 
     public void setExt(boolean ext) {
         Log.d("ext", String.valueOf(ext));
@@ -72,6 +74,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_five, container, false);
+            prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             textView = (TextView) rootView.findViewById(R.id.textView);
             sp = getActivity().getSharedPreferences("game", Context.MODE_PRIVATE);
 
@@ -198,7 +201,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         } else {
             showEnd();
             ok = false;
-            soundPool.play(1, 1, 1, 0, 0, 1);
+            if (prefs.getBoolean("sound", true)) {
+                soundPool.play(1, 1, 1, 0, 0, 1);
+            }
             return;
         }
         ok = true;

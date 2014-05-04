@@ -13,17 +13,17 @@
     <string name="setting">设置</string>
 
     <!-- 设置 -->
-    <string name="about">关于</string>
+    <string name="ver">版本</string>
 
     <string name="clean">清零</string>
-    <string name="clean_ask">请问您是否要清零今日的五毒记录?</string>
+    <string name="clean_ask">请问是否要清除今日的五毒记录?</string>
     <string name="clean_end">今日清零完毕</string>
 
-    <string name="last">忏悔录显示条数</string>
-    <string name="last_summary">最近的天数,默认5天</string>
+    <string name="last">忏悔录条数</string>
+    <string name="last_summary">显示最近的天数,默认5天</string>
 
-    <string name="play">抽的基数</string>
-    <string name="play_summary">犯一次错抽几次，默认10次</string>
+    <string name="play">惩戒基数</string>
+    <string name="play_summary">犯1次错，自行责罚的次数，默认10次</string>
 
     <string name="sound_summary">声音播放状态</string>
     <string name="sound_title">音效</string>
@@ -86,4 +86,5 @@
     <string name="n1">三次</string>
     <string name="n2">六次</string>
     <string name="n3">九次</string>
+
 </resources>
