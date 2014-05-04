@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sounds">
+        <item>钟声</item>
+        <item>耳光</item>
+    </string-array>
+    <string-array name="number">
+        <item>三次</item>
+        <item>六次</item>
+        <item>九次</item>
+    </string-array>
+    <string-array name="last">
+        <item>5</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="play">
+        <item>10</item>
+        <item>5</item>
+        <item>3</item>
+    </string-array>
+</resources>
