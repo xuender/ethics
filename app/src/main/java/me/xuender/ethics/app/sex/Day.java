@@ -24,6 +24,7 @@ public class Day {
                 sb.append('\n');
             }
             sb.append(gala);
+            no = true;
         }
         this.gala = sb.toString();
     }

@@ -1004,14 +1004,18 @@ public final class ChineseCalendar extends GregorianCalendar {
         sFestival.put("1031", "万圣节");
 
         sFestival.put("1225", "圣诞节");
-
+        //农历
         lFestival.put("0101", "春节");
-
         lFestival.put("0115", "元宵");
+        lFestival.put("0219", "观音诞辰");
+        lFestival.put("0408", "浴佛节");
         lFestival.put("0505", "端午");
+        lFestival.put("0619", "观音成道");
         lFestival.put("0707", "七夕");
+        lFestival.put("0919", "观音出家");
         lFestival.put("0815", "中秋");
         lFestival.put("0909", "重阳");
+        lFestival.put("1117", "弥陀诞辰");
         lFestival.put("1208", "腊八");
     }
 }  
