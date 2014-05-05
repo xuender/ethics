@@ -1,8 +1,8 @@
 apply plugin: 'android'
 
 android {
-    final VERSION_CODE = 17
-    final VERSION_NAME = "1.17"
+    final VERSION_CODE = 18
+    final VERSION_NAME = "1.18"
     compileSdkVersion 19
     buildToolsVersion "19.0.3"
 

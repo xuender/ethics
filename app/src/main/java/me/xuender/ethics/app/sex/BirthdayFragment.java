@@ -27,7 +27,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +40,7 @@ import me.xuender.ethics.app.notes.NoteAdapter;
  * Created by ender on 14-5-1.
  */
 public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInterface.OnClickListener,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, Comparator<Note> {
     private View rootView;
     private TextView textView;
     private NoteAdapter adapter;
@@ -103,10 +102,12 @@ public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInte
             listView = (ListView) rootView.findViewById(R.id.listView);
             adapter = new NoteAdapter(rootView.getContext(), new ArrayList<Note>(), R.color.土,
                     getString(R.string.format));
+            adapter.sort(this);
             listView.setAdapter(adapter);
             notes = getActivity().getSharedPreferences("sex", Context.MODE_PRIVATE);
             if (tops != null) {
                 adapter.addAll(tops);
+                adapter.sort(this);
             }
             listView.setOnItemClickListener(this);
             initData();
@@ -127,22 +128,17 @@ public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInte
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        adapter.sort(this);
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void add(List<Note> notes) {
-        Collections.sort(notes, new Comparator<Note>() {
-            @Override
-            public int compare(Note lhs, Note rhs) {
-                return Long.valueOf(rhs.getCreate().getTime() - lhs.getCreate().getTime()).intValue();
-            }
-        });
-        if (adapter == null) {
-            tops = notes;
-        } else {
+        tops = notes;
+        if (adapter != null) {
             adapter.clear();
-            adapter.addAll(notes);
+            adapter.addAll(tops);
+            adapter.sort(this);
         }
     }
 
@@ -163,6 +159,7 @@ public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInte
             adapter.add(note);
             saveNote();
         }
+        adapter.sort(this);
     }
 
     private void saveNote() {
@@ -202,5 +199,10 @@ public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInte
                         }
                     }).show();
         }
+    }
+
+    @Override
+    public int compare(Note lhs, Note rhs) {
+        return Long.valueOf(rhs.getCreate().getTime() - lhs.getCreate().getTime()).intValue();
     }
 }

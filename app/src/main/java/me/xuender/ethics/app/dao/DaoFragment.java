@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import me.xuender.ethics.app.R;
@@ -26,14 +25,9 @@ public class DaoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_book, container, false);
-            final LinearLayout ll = (LinearLayout) rootView.findViewById(R.id.book);
-            ll.setPadding(10,10,10,10);
-            for (String t : getResources().getStringArray(num)) {
-                TextView tv = new TextView(getActivity());
-                tv.setText(t);
-                ll.addView(tv);
-            }
+            rootView = inflater.inflate(R.layout.fragment_dao, container, false);
+            final TextView tv = (TextView) rootView.findViewById(R.id.dao);
+            tv.setText(getString(num));
         }
         return rootView;
     }

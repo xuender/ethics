@@ -14,8 +14,8 @@ import me.xuender.ethics.app.R;
  */
 public class DaoAdapter extends FragmentPagerAdapter {
     private List<DaoFragment> fragments = new ArrayList<DaoFragment>();
-    private static final int[] IDS = {R.array.d0, R.array.d1, R.array.d2, R.array.d3, R.array.d4,
-            R.array.d5, R.array.d6, R.array.d7, R.array.d8, R.array.d9};
+    private static final int[] IDS = {R.string.d0, R.string.d1, R.string.d2, R.string.d3, R.string.d4,
+            R.string.d5, R.string.d6, R.string.d7, R.string.d8, R.string.d9};
 
     public DaoAdapter(FragmentManager fm, String[] daos) {
         super(fm);

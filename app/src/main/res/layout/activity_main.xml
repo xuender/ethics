@@ -180,6 +180,13 @@
                 android:layout_width="0pt"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/dao"
+                android:src="@drawable/ic_dao" />
+
+            <ImageButton
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:id="@+id/call"
                 android:src="@drawable/ic_call" />
 
@@ -189,19 +196,19 @@
                 android:layout_weight="1"
                 android:id="@+id/sex"
                 android:src="@drawable/ic_tj" />
-
-            <ImageButton
-                android:layout_width="0pt"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/dao"
-                android:src="@drawable/ic_dao" />
         </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:weightSum="3">
+
+            <TextView
+                android:text="@string/dao"
+                android:layout_width="0pt"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
 
             <TextView
                 android:text="@string/call"
@@ -212,13 +219,6 @@
 
             <TextView
                 android:text="@string/sex"
-                android:layout_width="0pt"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
-
-            <TextView
-                android:text="@string/dao"
                 android:layout_width="0pt"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
