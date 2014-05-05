@@ -195,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/dao"
-                android:src="@drawable/ic_tj" />
+                android:src="@drawable/ic_dao" />
         </TableRow>
 
         <TableRow

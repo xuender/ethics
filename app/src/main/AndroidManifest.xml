@@ -44,7 +44,7 @@
         <activity
             android:name=".dao.DaoActivity"
             android:label="@string/dao"
-            android:icon="@drawable/ic_call" />
+            android:icon="@drawable/ic_dao" />
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/setting"
