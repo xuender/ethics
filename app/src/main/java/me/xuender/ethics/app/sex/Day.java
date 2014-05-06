@@ -18,13 +18,13 @@ public class Day {
         StringBuilder sb = new StringBuilder();
         if (chineseGala != null) {
             sb.append(chineseGala);
+            this.no = true;
         }
         if (gala != null) {
             if (sb.length() > 0) {
                 sb.append('\n');
             }
             sb.append(gala);
-            no = true;
         }
         this.gala = sb.toString();
     }

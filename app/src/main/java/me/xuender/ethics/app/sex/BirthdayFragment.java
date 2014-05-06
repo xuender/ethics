@@ -203,6 +203,6 @@ public class BirthdayFragment extends Fragment implements OnAddPoint, DialogInte
 
     @Override
     public int compare(Note lhs, Note rhs) {
-        return Long.valueOf(rhs.getCreate().getTime() - lhs.getCreate().getTime()).intValue();
+        return lhs.getCreate().compareTo(rhs.getCreate());
     }
 }

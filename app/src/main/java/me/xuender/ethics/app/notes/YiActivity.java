@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
+import me.xuender.ethics.app.EthicsApplication;
 import me.xuender.ethics.app.R;
 
 /**
@@ -30,6 +31,7 @@ public class YiActivity extends ActionBarActivity implements ActionBar.TabListen
         actionBar.setDisplayHomeAsUpEnabled(true);
         adapter = new YiAdapter(getSupportFragmentManager(), this);
         adapter.setOnSetTab(this);
+        ((EthicsApplication) getApplication()).setOnSelectNote(adapter);
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {

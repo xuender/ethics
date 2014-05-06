@@ -1,5 +1,7 @@
 package me.xuender.ethics.app.book;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,33 +12,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
+import me.xuender.ethics.app.K;
 import me.xuender.ethics.app.R;
 
 /**
  * Created by ender on 14-4-30.
  */
 public class BookFragment extends Fragment {
-    private JSONArray array;
-    private String title;
     private View rootView;
 
-    public BookFragment setArray(JSONArray array) {
-        this.array = array;
-        try {
-            title = array.getJSONObject(0).getString("title");
-        } catch (JSONException e) {
-            Log.e("read", "error", e);
-        }
-        return this;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,6 +35,7 @@ public class BookFragment extends Fragment {
             try {
                 LinearLayout ll = (LinearLayout) rootView.findViewById(R.id.book);
                 Log.d("读取", "three.json");
+                JSONArray array = new JSONArray(getArguments().getString(K.array.name(), "[]"));
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject obj = array.getJSONObject(i);
                     TextView title = new TextView(rootView.getContext());

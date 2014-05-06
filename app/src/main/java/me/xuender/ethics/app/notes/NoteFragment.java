@@ -24,6 +24,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 
+import me.xuender.ethics.app.EthicsApplication;
+import me.xuender.ethics.app.K;
 import me.xuender.ethics.app.R;
 
 /**
@@ -34,29 +36,16 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
     private View rootView;
     private TextView textView;
     private SharedPreferences notes;
-    String title;
-    String key;
+    private String title;
+    private String key;
     private EditText editText;
     private AlertDialog alert;
     private NoteAdapter adapter;
     private ListView listView;
-    int input;
+    private int input;
     private OnSelectNote onSelectNote;
-    Context context;
     private boolean del = false;
     private int nowPosition;
-    int textColor = R.color.木;
-
-    public void setOnSelectNote(OnSelectNote onSelectNote) {
-        this.onSelectNote = onSelectNote;
-    }
-
-//    public NoteFragment(String title, int input, String key, Context context) {
-//        this.title = title;
-//        this.key = key;
-//        this.input = input;
-//        this.context = context;
-//    }
 
     public void add() {
         showAlert();
@@ -64,13 +53,13 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
 
     public void del() {
         del = true;
-        Toast.makeText(context, getString(R.string.del_click), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), getString(R.string.del_click), Toast.LENGTH_SHORT).show();
     }
 
     private AlertDialog showAlert() {
         if (alert == null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle(context.getString(input));
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(getActivity().getString(input));
             builder.setIcon(android.R.drawable.stat_sys_warning);
             builder.setView(getEditText());
             builder.setPositiveButton(R.string.ok, this);
@@ -92,7 +81,7 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
 
     private EditText getEditText() {
         if (editText == null) {
-            editText = new EditText(context);
+            editText = new EditText(getActivity());
             editText.setInputType(InputType.TYPE_CLASS_TEXT);
         }
         return editText;
@@ -108,13 +97,18 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
                              Bundle savedInstanceState) {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_note, container, false);
+            title = getArguments().getString(K.title.name());
             textView = (TextView) rootView.findViewById(R.id.textView);
             textView.setText(title);
-            notes = context.getSharedPreferences("notes", Context.MODE_PRIVATE);
+            notes = getActivity().getSharedPreferences("notes", Context.MODE_PRIVATE);
             listView = (ListView) rootView.findViewById(R.id.listView);
-            adapter = new NoteAdapter(context, new ArrayList<Note>(), textColor);
+            adapter = new NoteAdapter(getActivity(), new ArrayList<Note>(),
+                    getArguments().getInt(K.color.name(), R.color.木));
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
+            input = getArguments().getInt(K.input.name());
+            key = getArguments().getString(K.key.name());
+            onSelectNote = ((EthicsApplication) getActivity().getApplication()).getOnSelectNote();
             initData();
         }
         return rootView;
@@ -174,7 +168,7 @@ public class NoteFragment extends Fragment implements DialogInterface.OnClickLis
         Log.d("view", String.valueOf(id));
         if (del) {
             nowPosition = position;
-            new AlertDialog.Builder(context).setTitle(getString(R.string.del))
+            new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.del))
                     .setMessage(getString(R.string.del_ask))
                     .setIcon(android.R.drawable.ic_menu_help)
                     .setPositiveButton(android.R.string.yes, this)

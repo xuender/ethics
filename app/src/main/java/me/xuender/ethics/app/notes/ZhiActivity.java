@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
+import me.xuender.ethics.app.K;
 import me.xuender.ethics.app.R;
 
 /**
@@ -25,11 +26,12 @@ public class ZhiActivity extends ActionBarActivity {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         noteFragment = new NoteFragment();
-        noteFragment.title = getString(R.string.zhi_summary);
-        noteFragment.input = R.string.input;
-        noteFragment.key = ZHI_KEY;
-        noteFragment.context = this;
-        noteFragment.textColor = R.color.木;
+        Bundle bundle = new Bundle();
+        bundle.putString(K.title.name(), getString(R.string.zhi_summary));
+        bundle.putInt(K.input.name(), R.string.input);
+        bundle.putString(K.key.name(), ZHI_KEY);
+        bundle.putInt(K.color.name(), R.color.木);
+        noteFragment.setArguments(bundle);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, noteFragment)

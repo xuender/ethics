@@ -1,12 +1,14 @@
 package me.xuender.ethics.app.notes;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.Locale;
 
+import me.xuender.ethics.app.K;
 import me.xuender.ethics.app.R;
 
 
@@ -28,11 +30,12 @@ public class YiAdapter extends FragmentPagerAdapter implements OnSelectNote {
     public NoteFragment getNoteFragment() {
         if (noteFragment == null) {
             noteFragment = new NoteFragment();
-            noteFragment.title = nowNote.getTitle();
-            noteFragment.input = R.string.inputGood;
-            noteFragment.key = nowNote.getTitle();
-            noteFragment.context = context;
-            noteFragment.textColor = R.color.土;
+            Bundle bundle = new Bundle();
+            bundle.putString(K.title.name(), nowNote.getTitle());
+            bundle.putInt(K.input.name(), R.string.inputGood);
+            bundle.putString(K.key.name(), nowNote.getTitle());
+            bundle.putInt(K.color.name(), R.color.土);
+            noteFragment.setArguments(bundle);
         }
         return noteFragment;
     }
@@ -40,12 +43,12 @@ public class YiAdapter extends FragmentPagerAdapter implements OnSelectNote {
     public NoteFragment getUserFragment() {
         if (userFragment == null) {
             userFragment = new NoteFragment();
-            userFragment.title = context.getString(R.string.yi_summary);
-            userFragment.input = R.string.inputName;
-            userFragment.key = "_users";
-            userFragment.context = context;
-            userFragment.textColor = R.color.土;
-            userFragment.setOnSelectNote(this);
+            Bundle bundle = new Bundle();
+            bundle.putString(K.title.name(), context.getString(R.string.yi_summary));
+            bundle.putInt(K.input.name(), R.string.inputName);
+            bundle.putString(K.key.name(), "_users");
+            bundle.putInt(K.color.name(), R.color.土);
+            userFragment.setArguments(bundle);
         }
         return userFragment;
     }

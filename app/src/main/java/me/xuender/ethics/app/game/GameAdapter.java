@@ -17,6 +17,7 @@ public class GameAdapter extends FragmentPagerAdapter {
         gameFragment = new GameFragment();
         gameFragment.setOnAddPoint(topFragment);
         gameFragment.setExt(ext);
+        //TODO 这里有横屏bug
     }
 
     @Override
