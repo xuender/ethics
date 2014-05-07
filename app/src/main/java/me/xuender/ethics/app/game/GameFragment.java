@@ -23,8 +23,6 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -33,10 +31,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import me.xuender.ethics.app.EthicsApplication;
+import me.xuender.ethics.app.K;
 import me.xuender.ethics.app.R;
 import me.xuender.ethics.app.book.Question;
 import me.xuender.ethics.app.notes.Note;
-import me.xuender.ethics.app.notes.NoteAdapter;
 
 /**
  * Created by ender on 14-5-1.
@@ -56,16 +55,12 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private boolean ext = false;
     private SharedPreferences prefs;
 
-    public void setExt(boolean ext) {
-        Log.d("ext", String.valueOf(ext));
-        this.ext = ext;
-        if (ext) {
-            key = "ext";
+    public OnAddPoint getOnAddPoint() {
+        if (onAddPoint == null) {
+            onAddPoint = ((EthicsApplication) getActivity().getApplication())
+                    .getOnAddPoint(String.valueOf(ext));
         }
-    }
-
-    public void setOnAddPoint(OnAddPoint onAddPoint) {
-        this.onAddPoint = onAddPoint;
+        return onAddPoint;
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -74,6 +69,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_five, container, false);
+            ext = getArguments().getBoolean(K.ext.name(), false);
+            if (ext) {
+                key = K.ext.name();
+            }
             prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             textView = (TextView) rootView.findViewById(R.id.textView);
             sp = getActivity().getSharedPreferences("game", Context.MODE_PRIVATE);
@@ -81,7 +80,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             声音初始化();
             init();
 
-            onAddPoint.add(tops);
+            getOnAddPoint().add(tops);
         }
         return rootView;
     }
@@ -144,7 +143,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 note.setCreate(new Date(obj.getLong("c")));
                 tops.add(note);
             }
-            onAddPoint.add(tops);
+            getOnAddPoint().add(tops);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -232,7 +231,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         while (tops.size() > 10) {
             tops.remove(10);
         }
-        onAddPoint.add(tops);
+        getOnAddPoint().add(tops);
         SharedPreferences.Editor editor = sp.edit();
         JSONArray array = new JSONArray();
         for (Note n : tops) {

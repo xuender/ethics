@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.xuender.ethics.app.EthicsApplication;
 import me.xuender.ethics.app.R;
 import me.xuender.ethics.app.notes.Note;
 import me.xuender.ethics.app.notes.NoteAdapter;

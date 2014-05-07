@@ -1,8 +1,11 @@
 package me.xuender.ethics.app.game;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import me.xuender.ethics.app.K;
 
 /**
  * Created by ender on 14-5-1.
@@ -11,13 +14,17 @@ public class GameAdapter extends FragmentPagerAdapter {
     private GameFragment gameFragment;
     private TopFragment topFragment;
 
+    public TopFragment getTopFragment() {
+        return topFragment;
+    }
+
     public GameAdapter(FragmentManager fm, boolean ext) {
         super(fm);
         topFragment = new TopFragment();
         gameFragment = new GameFragment();
-        gameFragment.setOnAddPoint(topFragment);
-        gameFragment.setExt(ext);
-        //TODO 这里有横屏bug
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(K.ext.name(), ext);
+        gameFragment.setArguments(bundle);
     }
 
     @Override

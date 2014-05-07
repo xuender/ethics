@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
+import me.xuender.ethics.app.EthicsApplication;
 import me.xuender.ethics.app.R;
 
 /**
@@ -30,6 +31,9 @@ public class GameActivity extends ActionBarActivity implements ActionBar.TabList
             setTitle(R.string.game_ext);
         }
         gameAdapter = new GameAdapter(getSupportFragmentManager(), ext);
+        ((EthicsApplication) getApplication()).putOnAddPoint(String.valueOf(ext),
+                gameAdapter.getTopFragment());
+
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(gameAdapter);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
